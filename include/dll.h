@@ -6,12 +6,14 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:26:04 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/02 14:34:11 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/02 18:39:36 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DLL_H
 # define DLL_H
+
+# include <stddef.h>
 
 typedef struct s_dll {
 	struct s_dll	*prev;
@@ -41,7 +43,7 @@ void		add_dll(t_dll **dll_ptr, t_dll *new_dll);
  * @param dll A pointer to the first node of a dll
  * @return The size (number of nodes) of the given dll
  */
-int			dll_size(t_dll *dll);
+size_t		dll_size(t_dll *dll);
 
 /**
  * Frees a dll node.

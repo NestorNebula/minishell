@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:26:04 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/02 18:26:07 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/02 18:40:22 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void		add_dll(t_dll **dll_ptr, t_dll *new_dll)
 	}
 }
 
-int			dll_size(t_dll *dll)
+size_t		dll_size(t_dll *dll)
 {
-	int	count;
+	size_t	count;
 
 	if (dll == NULL)
 		return (0);
