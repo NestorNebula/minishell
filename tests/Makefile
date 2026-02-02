@@ -18,7 +18,7 @@ INCLUDE_DIR = $(ROOT_DIR)/include
 
 SRC_DIR = $(ROOT_DIR)/src
 
-SRC =
+SRC = $(SRC_DIR)/dll.c $(SRC_DIR)/command.c $(SRC_DIR)/fd.c
 
 OBJ = $(SRC:.c=.o)
 
