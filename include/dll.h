@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:26:04 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/02 14:26:05 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:34:11 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,5 @@ void		clear_dll(t_dll **dll, void (*del)(void *));
  * @param f A pointer to a function that will be called on each dll node
  */
 void		dll_for_each(t_dll *dll, void (*f)(void *));
-
-
 
 #endif // !DLL_H
