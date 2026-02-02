@@ -8,7 +8,7 @@ RMFLAGS = -r -f
 
 TESTS_DIR = src
 
-TESTS = $(TESTS_DIR)/dll.c
+TESTS = $(TESTS_DIR)/dll.c $(TESTS_DIR)/command.c $(TESTS_DIR)/fd.c
 
 TESTS_EXECS = $(TESTS:.c=.out)
 
