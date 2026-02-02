@@ -50,7 +50,7 @@ int			dll_size(t_dll *dll);
  * @param del A pointer to a function that will be used to
  * free the dll's data. If NULL, the dll's data won't be freed
  */
-void		free_dll(void *dll, void (*del)(void *));
+void		free_dll(t_dll *dll, void (*del)(void *));
 
 /**
  * Frees all the nodes in a dll.
