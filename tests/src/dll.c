@@ -75,6 +75,7 @@ void	dll_for_each_test(void)
 
 	unit_test = new_unit_test("dll_for_each", false);
 	i = 0;
+	dll = NULL;
 	while (i < SIZE)
 	{
 		add_dll(&dll, new_dll(NULL));
