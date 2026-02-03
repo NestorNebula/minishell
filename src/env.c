@@ -6,13 +6,16 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 12:04:54 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/03 12:14:56 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:00:30 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "env.h"
 #include "libft.h"
+
+static	t_env_var	*add_env_var(t_dll **env_vars_ptr, const char *key,
+						char *value);
 
 t_env_var	*new_env_var(const char *key, char *value)
 {
@@ -52,6 +55,27 @@ t_env_var	*find_env_var(t_dll *env_vars, const char *key)
 	return (env_var);
 }
 
+t_env_var	*set_env_var(t_dll **env_vars_ptr, const char *key, char *value)
+{
+	char		*new_value;
+	t_env_var	*env_var;
+
+	if (env_vars_ptr == NULL || key == NULL || value == NULL)
+		return (NULL);
+	env_var = find_env_var(*env_vars_ptr, key);
+	if (env_var == NULL)
+		env_var = add_env_var(env_vars_ptr, key, value);
+	else
+	{
+		new_value = ft_strdup(value);
+		if (new_value == NULL)
+			return (NULL);
+		free(env_var->value);
+		env_var->value = new_value;
+	}
+	return (env_var);
+}
+
 void		free_env_var(void *env_var)
 {
 	if (env_var == NULL)
@@ -59,4 +83,25 @@ void		free_env_var(void *env_var)
 	free(((t_env_var *) env_var)->value);
 	free((void *)((t_env_var *) env_var)->key);
 	free((t_env_var *) env_var);
+}
+
+static	t_env_var	*add_env_var(t_dll **env_vars_ptr, const char *key,
+						char *value)
+{
+	t_dll		*node;
+	t_env_var	*env_var;
+
+	if (env_vars_ptr == NULL || key == NULL || value == NULL)
+		return (NULL);
+	env_var = new_env_var(key, value);
+	if (env_var == NULL)
+		return (NULL);
+	node = new_dll(env_var);
+	if (node == NULL)
+	{
+		free_env_var(env_var);
+		return (NULL);
+	}
+	add_dll(env_vars_ptr, node);
+	return (env_var);
 }
