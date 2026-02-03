@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 08:03:00 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/01/30 09:52:37 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/03 10:37:34 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdarg.h>
 # include <stddef.h>
 # include <stdbool.h>
-# include "libft-string.h"
+# include "libft_string.h"
 
 # define PREF_MAX_SIZE 4
 
