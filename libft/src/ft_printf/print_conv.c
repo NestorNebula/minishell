@@ -24,7 +24,7 @@ static void	print_width(t_conv *conv, t_string *str);
 
 static void	print_precision(t_conv *conv, t_string *str);
 
-int		print_conv(t_conv *conv, t_string *str)
+int	print_conv(t_conv *conv, t_string *str)
 {
 	if (conv->err)
 	{

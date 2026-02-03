@@ -22,7 +22,6 @@ static void	handle_conversion(const char **format, t_string *str,
 
 static int	handle_output(int fd, t_string *str);
 
-
 /**
  *  Writes formatted output to a file descriptor using format
  *  and others arguments.
@@ -34,11 +33,9 @@ static int	handle_output(int fd, t_string *str);
  */
 int	ft_dprintf(int fd, const char *format, ...)
 {
-	int			res;
 	va_list		ap;
 	t_string	*str;
 
-	res = 0;
 	if (format == NULL)
 		return (-1);
 	str = new_string();
@@ -54,7 +51,6 @@ int	ft_dprintf(int fd, const char *format, ...)
 	}
 	va_end(ap);
 	return (handle_output(fd, str));
-
 }
 
 static void	handle_char(char c, t_string *str)
