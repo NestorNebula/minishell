@@ -50,7 +50,7 @@ static char	*get_next_path(const char **paths_ptr, char *buf)
 		(*paths_ptr)++;
 	next_delimiter = ft_strchr(*paths_ptr, ':');
 	if (next_delimiter == NULL)
-		return (NULL);
+		next_delimiter = ft_strchr(*paths_ptr, '\0');
 	size = next_delimiter - *paths_ptr;
 	if (size == 0)
 		return (NULL);
