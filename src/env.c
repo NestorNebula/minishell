@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 12:04:54 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/03 13:00:30 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:02:14 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_env_var	*set_env_var(t_dll **env_vars_ptr, const char *key, char *value)
 	return (env_var);
 }
 
-void		free_env_var(void *env_var)
+void	free_env_var(void *env_var)
 {
 	if (env_var == NULL)
 		return ;
