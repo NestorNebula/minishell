@@ -34,11 +34,9 @@ static int	handle_output(int fd, t_string *str);
  */
 int	ft_dprintf(int fd, const char *format, ...)
 {
-	int			res;
 	va_list		ap;
 	t_string	*str;
 
-	res = 0;
 	if (format == NULL)
 		return (-1);
 	str = new_string();
