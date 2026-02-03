@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fd.c                                               :+:      :+:    :+:   */
+/*   dll-helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 18:31:51 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/02 18:31:52 by nhoussie         ###   ########.fr       */
+/*   Created: 2026/02/03 10:45:40 by nhoussie          #+#    #+#             */
+/*   Updated: 2026/02/03 10:46:18 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "fd.h"
+#include "dll.h"
 
-t_fd	*new_fd(int fd, int status)
+size_t	dll_size(t_dll *dll)
 {
-	t_fd	*fd_ptr;
+	size_t	count;
 
-	fd_ptr = malloc(sizeof(t_fd));
-	if (fd_ptr == NULL)
-		return (NULL);
-	fd_ptr->fd = fd;
-	fd_ptr->status = status;
-	return (fd_ptr);
+	if (dll == NULL)
+		return (0);
+	count = 0;
+	while (dll != NULL)
+	{
+		count++;
+		dll = dll->next;
+	}
+	return (count);
 }
 
-void	free_fd(void *fd)
+void	dll_for_each(t_dll *dll, void (*f)(void *))
 {
-	free(fd);
+	while (dll != NULL)
+	{
+		(*f)(dll);
+		dll = dll->next;
+	}
 }

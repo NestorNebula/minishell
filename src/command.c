@@ -30,7 +30,7 @@ t_command	*new_command(const char **raw_argv)
 	return (command);
 }
 
-void		free_command(void *command)
+void	free_command(void *command)
 {
 	free(command);
 }

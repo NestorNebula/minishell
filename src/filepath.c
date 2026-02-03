@@ -27,7 +27,7 @@ char	*find_filepath(const char *filename)
 	const char	*paths;
 	char		path[PATH_MAX + 2];
 	char		*filepath;
-	
+
 	if (filename == NULL || ft_strchr("./", filename[0]))
 		return (NULL);
 	paths = getenv(PATHS_KEY);

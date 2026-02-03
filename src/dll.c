@@ -6,14 +6,14 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:26:04 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/02 18:40:22 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/03 10:46:14 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "dll.h"
 
-t_dll		*new_dll(void *data)
+t_dll	*new_dll(void *data)
 {
 	t_dll	*dll;
 
@@ -26,7 +26,7 @@ t_dll		*new_dll(void *data)
 	return (dll);
 }
 
-void		add_dll(t_dll **dll_ptr, t_dll *new_dll)
+void	add_dll(t_dll **dll_ptr, t_dll *new_dll)
 {
 	t_dll	*last_node;
 
@@ -43,22 +43,7 @@ void		add_dll(t_dll **dll_ptr, t_dll *new_dll)
 	}
 }
 
-size_t		dll_size(t_dll *dll)
-{
-	size_t	count;
-
-	if (dll == NULL)
-		return (0);
-	count = 0;
-	while (dll != NULL)
-	{
-		count++;
-		dll = dll->next;
-	}
-	return (count);
-}
-
-void		free_dll(t_dll *dll, void (*del)(void *))
+void	free_dll(t_dll *dll, void (*del)(void *))
 {
 	if (dll == NULL)
 		return ;
@@ -71,7 +56,7 @@ void		free_dll(t_dll *dll, void (*del)(void *))
 	free(dll);
 }
 
-void		clear_dll(t_dll **dll, void (*del)(void *))
+void	clear_dll(t_dll **dll, void (*del)(void *))
 {
 	t_dll	*next;
 
@@ -82,14 +67,5 @@ void		clear_dll(t_dll **dll, void (*del)(void *))
 		next = (*dll)->next;
 		free_dll(*dll, del);
 		*dll = next;
-	}
-}
-
-void		dll_for_each(t_dll *dll, void (*f)(void *))
-{
-	while (dll != NULL)
-	{
-		(*f)(dll);
-		dll = dll->next;
 	}
 }
