@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:26:08 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/04 10:04:53 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:31:22 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,34 @@
 # define FILE_H
 
 typedef enum e_file_status {
-	FILE_DEFAULT,
+	FILE_DEF,
 	FILE_OK,
-	FILE_PDENIED,
-	FILE_NOTFOUND,
-	FILE_HEREDOC,
+	FILE_ERR,
 }				t_file_status;
 
+typedef enum e_file_type {
+	FILE_REG,
+	FILE_STD,
+	FILE_PIPE,
+	FILE_HEREDOC,
+}				t_file_type;
+
 typedef struct s_file {
-	const char	*path;
-	int			fd;
-	int			status;
+	const char		*path;
+	int				fd;
+	t_file_status	status;
+	t_file_type		type;
+	int				err_code;
 }				t_file;
 
 /**
  * Initializes a new file structure.
  *
  * @param path The path to the file
- * @param fd The file descriptor
- * @param status The file status
+ * @param type The file type 
  * @return A pointer to a file structure on success, NULL on error
  */
-t_file	*new_file(const char *path, int fd, t_file_status status);
+t_file	*new_file(const char *path, t_file_type type);
 
 /**
  * Frees a file structure.
