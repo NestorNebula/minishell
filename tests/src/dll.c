@@ -1,6 +1,6 @@
 #include "cut.h"
 #include "dll.h"
-#include "fd.h"
+#include "file.h"
 
 #define SIZE 10
 
@@ -16,17 +16,17 @@ void	new_dll_test(void)
 {
 	t_unit_test	*unit_test;
 	t_dll		*dll;
-	t_fd		*fd;
+	t_file		*file;
 
 	unit_test = new_unit_test("new_dll", false);
-	fd = new_fd(0, 0);
-	cut_assert(fd != NULL, unit_test, "data initialization succeeds");
-	dll = new_dll(fd);
+	file = new_file("", 0, 0);
+	cut_assert(file != NULL, unit_test, "data initialization succeeds");
+	dll = new_dll(file);
 	cut_assert(dll != NULL, unit_test,
 		"returns non-null pointer on dll structure");
-	cut_expect(dll->data == fd, unit_test,
+	cut_expect(dll->data == file, unit_test,
 		"sets dll node's content to given data");
-	free_dll(dll, free_fd);
+	free_dll(dll, free_file);
 	end_unit_test(unit_test);
 }
 
