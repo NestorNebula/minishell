@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:31:51 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/04 10:23:08 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/04 15:35:38 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "file.h"
 #include "libft.h"
 
-t_file	*new_file(const char *path, int fd, t_file_status status)
+t_file	*new_file(const char *path, t_file_type type)
 {
 	t_file	*file;
 
@@ -31,8 +31,8 @@ t_file	*new_file(const char *path, int fd, t_file_status status)
 			return (NULL);
 		}
 	}
-	file->fd = fd;
-	file->status = status;
+	file->type = type;
+	file->status = FILE_DEF;
 	return (file);
 }
 
