@@ -29,6 +29,7 @@ typedef enum e_file_type {
 typedef struct s_file {
 	const char		*path;
 	int				fd;
+	int				flags;
 	t_file_status	status;
 	t_file_type		type;
 	int				err_code;
@@ -39,9 +40,10 @@ typedef struct s_file {
  *
  * @param path The path to the file
  * @param type The file type 
+ * @param flags The flags to use when opening the file
  * @return A pointer to a file structure on success, NULL on error
  */
-t_file	*new_file(const char *path, t_file_type type);
+t_file	*new_file(const char *path, t_file_type type, int flags);
 
 /**
  * Frees a file structure.
