@@ -19,7 +19,7 @@ void	new_dll_test(void)
 	t_file		*file;
 
 	unit_test = new_unit_test("new_dll", false);
-	file = new_file(NULL, FILE_REG);
+	file = new_file(NULL, FILE_REG, 0);
 	cut_assert(file != NULL, unit_test, "data initialization succeeds");
 	dll = new_dll(file);
 	cut_assert(dll != NULL, unit_test,
