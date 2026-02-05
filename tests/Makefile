@@ -8,8 +8,8 @@ RMFLAGS = -r -f
 
 TESTS_DIR = src
 
-TESTS = $(TESTS_DIR)/dll.c $(TESTS_DIR)/command.c $(TESTS_DIR)/fd.c \
-		$(TESTS_DIR)/filepath.c $(TESTS_DIR)/env.c
+TESTS = $(TESTS_DIR)/dll.c $(TESTS_DIR)/command.c $(TESTS_DIR)/file.c \
+		$(TESTS_DIR)/filepath.c
 
 TESTS_EXECS = $(TESTS:.c=.out)
 
@@ -20,7 +20,7 @@ INCLUDE_DIR = $(ROOT_DIR)/include
 SRC_DIR = $(ROOT_DIR)/src
 
 SRC = $(SRC_DIR)/dll.c $(SRC_DIR)/dll-helpers.c $(SRC_DIR)/command.c \
-	  $(SRC_DIR)/fd.c $(SRC_DIR)/filepath.c $(SRC_DIR)/env.c
+	  $(SRC_DIR)/file.c $(SRC_DIR)/filepath.c
 
 OBJ = $(SRC:.c=.o)
 

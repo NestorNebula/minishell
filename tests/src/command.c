@@ -20,9 +20,9 @@ void	new_command_test(void)
 		"sets command's pid to -1");
 	cut_expect(command->wstatus == -1, unit_test,
 		"sets command's wstatus to -1");
-	cut_expect(command->in_fds == NULL, unit_test,
+	cut_expect(command->in_files == NULL, unit_test,
 		"sets command's in_fds to NULL");
-	cut_expect(command->out_fds == NULL, unit_test,
+	cut_expect(command->out_files == NULL, unit_test,
 		"sets command's out_fds to NULL");
 	free_command(command);
 	end_unit_test(unit_test);

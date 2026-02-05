@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:25:59 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/02 14:28:07 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/04 14:16:24 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_command {
 	char				*filepath;
 	int					pid;
 	int					wstatus;
-	t_dll				*in_fds;
-	t_dll				*out_fds;
+	t_dll				*in_files;
+	t_dll				*out_files;
 	t_pipe				pipe;
 }				t_command;
 
