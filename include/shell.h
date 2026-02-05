@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmonmire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 01:42:44 by cmonmire          #+#    #+#             */
-/*   Updated: 2026/02/05 01:46:39 by cmonmire         ###   ########.fr       */
+/*   Created: 2026/02/05 12:11:39 by cmonmire          #+#    #+#             */
+/*   Updated: 2026/02/05 12:11:42 by cmonmire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef SHELL_H
+# define SHELL_H
 
 typedef struct s_shell
 {
