@@ -50,6 +50,6 @@ t_file	*new_file(const char *path, t_file_type type, int flags);
  *
  * @param file A pointer to a file structure
  */
-void		free_file(void *file);
+void	free_file(void *file);
 
 #endif // !FILE_H

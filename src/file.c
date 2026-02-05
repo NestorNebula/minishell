@@ -37,7 +37,7 @@ t_file	*new_file(const char *path, t_file_type type, int flags)
 	return (file);
 }
 
-void		free_file(void *file)
+void	free_file(void *file)
 {
 	if (file != NULL)
 	{

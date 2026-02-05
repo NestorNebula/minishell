@@ -23,7 +23,7 @@ int	get_heredoc(const char *delimiter)
 {
 	t_pipe	hd_pipe;
 	int		rc;
-	
+
 	if (delimiter == NULL)
 		return (-1);
 	if (pipe(hd_pipe) == -1)
