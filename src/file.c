@@ -14,7 +14,7 @@
 #include "file.h"
 #include "libft.h"
 
-t_file	*new_file(const char *path, t_file_type type)
+t_file	*new_file(const char *path, t_file_type type, int flags)
 {
 	t_file	*file;
 
@@ -31,6 +31,7 @@ t_file	*new_file(const char *path, t_file_type type)
 			return (NULL);
 		}
 	}
+	file->flags = flags;
 	file->type = type;
 	file->status = FILE_DEF;
 	return (file);
