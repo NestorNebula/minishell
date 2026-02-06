@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 10:45:40 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/03 10:46:18 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/06 10:53:54 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ size_t	dll_size(t_dll *dll)
 		dll = dll->next;
 	}
 	return (count);
+}
+
+t_dll		*dll_last(t_dll *dll)
+{
+	if (dll == NULL)
+		return (NULL);
+	while (dll->next != NULL)
+		dll = dll->next;
+	return (dll);
 }
 
 void	dll_for_each(t_dll *dll, void (*f)(void *))
