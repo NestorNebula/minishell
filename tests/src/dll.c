@@ -67,6 +67,30 @@ void	dll_size_test(void)
 	end_unit_test(unit_test);
 }
 
+void	dll_last_test(void)
+{
+	t_unit_test	*unit_test;
+	t_dll		*dll;
+	t_dll		*new_node;
+
+	unit_test = new_unit_test("dll_last", false);
+	dll = NULL;
+	cut_expect(dll_last(dll) == NULL, unit_test,
+		"returns NULL for empty dll");
+	new_node = new_dll(NULL);
+	cut_assert(new_node != NULL, unit_test, "new node initialization succeeds");
+	add_dll(&dll, new_node);
+	cut_expect(dll_last(dll) == new_node, unit_test,
+		"returns only node in the dll");
+	new_node = new_dll(NULL);
+	cut_assert(new_node != NULL, unit_test, "second node initialization succeeds");
+	add_dll(&dll, new_node);
+	cut_expect(dll_last(dll) == new_node, unit_test,
+		"returns last node in the list");
+	clear_dll(&dll, NULL);
+	end_unit_test(unit_test);
+}
+
 void	dll_for_each_test(void)
 {
 	t_unit_test	*unit_test;
@@ -92,5 +116,6 @@ int	main(void)
 	new_dll_test();
 	add_dll_test();
 	dll_size_test();
+	dll_last_test();
 	dll_for_each_test();
 }
