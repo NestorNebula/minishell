@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:59:03 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 11:28:55 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:18:11 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,8 @@ int		prepare_command(t_dll *command_node)
 		prev = NULL;
 	else
 		prev = command_node->prev->data;
-	rc = prepare_files(command);
 	if (rc != 0)
 		return (rc);
-	if (pipe(command->pipe) == -1)
-		return (errno);
 	rc = prepare_stds(command, prev);
 	return (rc);
 }
