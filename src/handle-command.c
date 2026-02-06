@@ -15,7 +15,7 @@
 #include "exec.h"
 #include "process.h"
 
-int		handle_command(t_dll *command_node, t_shell *shell)
+int	handle_command(t_dll *command_node, t_shell *shell)
 {
 	int			rc;
 	t_command	*command;

@@ -52,8 +52,8 @@ static size_t	get_commands_count(t_dll *commands)
 	return (count);
 }
 
-static void		set_command_wstatus(t_dll *commands, int command_pid,
-					int wstatus)
+static void	set_command_wstatus(t_dll *commands, int command_pid,
+				int wstatus)
 {
 	t_command	*command;
 

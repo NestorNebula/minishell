@@ -20,7 +20,7 @@ static int	prepare_inputs(t_dll *inputs);
 
 static int	prepare_outputs(t_dll *outputs);
 
-int		prepare_files(t_command *command)
+int	prepare_files(t_command *command)
 {
 	int		rc;
 
@@ -61,8 +61,6 @@ static int	prepare_inputs(t_dll *inputs)
 	}
 	return (rc);
 }
-
-
 
 static int	prepare_outputs(t_dll *outputs)
 {

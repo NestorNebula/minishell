@@ -17,7 +17,7 @@
 
 static int	prepare_stds(t_command *command, t_command *prev);
 
-int		prepare_command(t_dll *command_node)
+int	prepare_command(t_dll *command_node)
 {
 	int			rc;
 	t_command	*command;
@@ -38,7 +38,7 @@ int		prepare_command(t_dll *command_node)
 
 static int	prepare_stds(t_command *command, t_command *prev)
 {
-	int	rc;
+	int		rc;
 	t_file	*last_in;
 	t_file	*last_out;
 

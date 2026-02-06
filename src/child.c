@@ -18,7 +18,7 @@
 
 static void	exit_from_child(int ec, t_shell *shell);
 
-int		handle_child(t_dll *command_node, t_shell *shell)
+int	handle_child(t_dll *command_node, t_shell *shell)
 {
 	int			ec;
 	t_command	*command;

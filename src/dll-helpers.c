@@ -27,7 +27,7 @@ size_t	dll_size(t_dll *dll)
 	return (count);
 }
 
-t_dll		*dll_last(t_dll *dll)
+t_dll	*dll_last(t_dll *dll)
 {
 	if (dll == NULL)
 		return (NULL);
