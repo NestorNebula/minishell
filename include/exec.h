@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 18:09:25 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 10:23:03 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/06 11:36:51 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXEC_H
 
 # include "command.h"
+# include "shell.h"
 
 /**
  * Prepares input/output files needed by the given command.
@@ -32,6 +33,15 @@ int		prepare_files(t_command *command);
  * @return 0 on success, an error code otherwise
  */
 int		prepare_command(t_dll *command_node);
+
+/**
+ * Creates a process to execute the given command in the given shell.
+ *
+ * @param command A pointer to a command structure
+ * @param shell A pointer to a shell structure
+ * @return 0 if the process was created successfully, an error code otherwise
+ */
+int		handle_command(t_command *command, t_shell *shell);
 
 /**
  * Executes the given command.
