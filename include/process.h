@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:06:08 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 10:23:01 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:36:20 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
  * Executes the given command inside a child process using the
  * environment variables provided by the given shell.
  *
- * @param command A pointer to a command structure
+ * @param command_node A pointer to a dll node containing
+ * a pointer to a command structure
  * @param shell A pointer to a shell structure
  * @return Doesn't return on success, the code of the error that occurred
  * otherwise
  */
-int		handle_child(t_command *command, t_shell *shell);
+int		handle_child(t_dll *command_node, t_shell *shell);
 
 /**
  * Updates the given command with the process id of the child

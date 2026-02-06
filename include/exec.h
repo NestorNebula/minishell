@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 18:09:25 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 14:19:36 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:36:45 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		prepare_files(t_command *command);
 /**
  * Prepares the given command for execution.
  *
- * @param command_node A pointer to a dll node containing a command structure
+ * @param command_node A pointer to a dll node containing
+ * a pointer to a command structure
  * @return 0 on success, an error code otherwise
  */
 int		prepare_command(t_dll *command_node);
@@ -37,11 +38,12 @@ int		prepare_command(t_dll *command_node);
 /**
  * Creates a process to execute the given command in the given shell.
  *
- * @param command A pointer to a command structure
+ * @param command_node A pointer to a dll node containing
+ * a pointer to a command structure
  * @param shell A pointer to a shell structure
  * @return 0 if the process was created successfully, an error code otherwise
  */
-int		handle_command(t_command *command, t_shell *shell);
+int		handle_command(t_dll *command_node, t_shell *shell);
 
 /**
  * Executes the given command.
