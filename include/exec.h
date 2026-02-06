@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 18:09:25 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 11:36:51 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/06 14:19:36 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ int		handle_command(t_command *command, t_shell *shell);
  * Executes the given command.
  *
  * @param command A pointer to a command structure
+ * @param shell A pointer to a shell structure
  * @return Doesn't return on success, the code of the error that occurred
  * otherwise
  */
-int		exec_command(t_command *command);
+int		exec_command(t_command *command, t_shell *shell);
 
 /**
  * Closes all input/output files used by the given command.
