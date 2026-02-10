@@ -40,6 +40,8 @@ void	add_dll(t_dll **dll_ptr, t_dll *new_dll)
 		while (last_node->next != NULL)
 			last_node = last_node->next;
 		last_node->next = new_dll;
+		if (new_dll != NULL)
+			new_dll->prev = last_node;
 	}
 }
 
