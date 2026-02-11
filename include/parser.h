@@ -1,0 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/11 11:27:07 by nhoussie          #+#    #+#             */
+/*   Updated: 2026/02/11 14:41:09 by nhoussie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PARSER_H
+# define PARSER_H
+
+# include "token.h"
+
+# define STATES_COUNT 31
+# define RULES_COUNT 11
+# define STEPS_COUNT 100 + RULES_COUNT
+
+typedef enum e_action
+{
+	A_NONE,
+	A_SHIFT,
+	A_REDUCE,
+	A_ACCEPT,
+}	t_action;
+
+typedef enum e_rule
+{
+	R_PIPE_SEQUENCE = STATES_COUNT,
+	R_SIMPLE_COMMAND,
+	R_CMD_NAME,
+	R_CMD_WORD,
+	R_CMD_PREFIX,
+	R_CMD_SUFFIX,
+	R_IO_REDIRECT,
+	R_IO_FILE,
+	R_FILENAME,
+	R_IO_HERE,
+	R_HERE_END,
+}	t_rule;
+
+typedef struct s_step
+{
+	int				state;
+	t_token_type	token;
+	t_action		action;
+	int				action_arg;
+	int				next_state;
+}	t_step;
+
+typedef t_step	*t_parsing_table;
+
+t_parsing_table	build_parsing_table(void);
+
+#endif // !PARSER_H
