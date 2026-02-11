@@ -24,6 +24,10 @@ void	new_dll_test(void)
 	dll = new_dll(file);
 	cut_assert(dll != NULL, unit_test,
 		"returns non-null pointer on dll structure");
+	cut_expect(dll->prev == NULL, unit_test,
+		"sets dll's previous node to NULL");
+	cut_expect(dll->next == NULL, unit_test,
+		"sets dll's next node to NULL");
 	cut_expect(dll->data == file, unit_test,
 		"sets dll node's content to given data");
 	free_dll(dll, free_file);
@@ -43,6 +47,8 @@ void	add_dll_test(void)
 	cut_assert(new_node != NULL, unit_test, "new node initialization succeeds");
 	add_dll(&dll, new_node);
 	cut_expect(dll->next == new_node, unit_test, "adds new node to end of dll");
+	cut_expect(new_node->prev == dll, unit_test,
+		"updates new node's previous node");
 	clear_dll(&dll, NULL);
 	end_unit_test(unit_test);
 }
