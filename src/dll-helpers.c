@@ -27,6 +27,15 @@ size_t	dll_size(t_dll *dll)
 	return (count);
 }
 
+t_dll	*dll_last(t_dll *dll)
+{
+	if (dll == NULL)
+		return (NULL);
+	while (dll->next != NULL)
+		dll = dll->next;
+	return (dll);
+}
+
 void	dll_for_each(t_dll *dll, void (*f)(void *))
 {
 	while (dll != NULL)
