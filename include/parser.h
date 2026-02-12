@@ -53,6 +53,12 @@ typedef struct s_step
 
 typedef t_step	*t_parsing_table;
 
+/**
+ * Initializes a parsing table and sets every step inside of it.
+ *
+ * @return A pointer to the first step of the parsing table on success,
+ * a NULL pointer on error
+ */
 t_parsing_table	build_parsing_table(void);
 
 #endif // !PARSER_H
