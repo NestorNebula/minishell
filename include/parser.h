@@ -13,6 +13,7 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "dll.h"
 # include "token.h"
 
 # define STATES_COUNT 31
@@ -60,5 +61,14 @@ typedef t_step	*t_parsing_table;
  * a NULL pointer on error
  */
 t_parsing_table	build_parsing_table(void);
+
+/**
+ * Parses a list of tokens using the program's parsing table.
+ *
+ * @param tokens A pointer to the first element of a dll
+ * @return If the given list of tokens is valid, a NULL pointer is returned,
+ * else, a pointer to the token that caused the list to be invalid is returned
+ */
+t_token			*parse_tokens(t_dll *tokens);
 
 #endif // !PARSER_H
