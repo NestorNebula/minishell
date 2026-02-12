@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 11:27:07 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/11 14:41:09 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/12 11:14:47 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,13 @@ typedef t_step	*t_parsing_table;
 t_parsing_table	build_parsing_table(void);
 
 /**
- * Parses a list of tokens using the program's parsing table.
+ * Parses a list of tokens using a given parsing table.
  *
  * @param tokens A pointer to the first element of a dll
+ * @param parsing_table A pointer to the first step of a parsing table
  * @return If the given list of tokens is valid, a NULL pointer is returned,
  * else, a pointer to the token that caused the list to be invalid is returned
  */
-t_token			*parse_tokens(t_dll *tokens);
+t_token			*parse_tokens(t_dll *tokens, t_parsing_table parsing_table);
 
 #endif // !PARSER_H
