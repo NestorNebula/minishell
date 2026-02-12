@@ -18,7 +18,7 @@
 
 # define STATES_COUNT 31
 # define RULES_COUNT 11
-# define STEPS_COUNT 100 + RULES_COUNT
+# define STEPS_COUNT 100
 
 typedef enum e_action
 {
