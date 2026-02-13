@@ -93,6 +93,7 @@ static t_token	*check_tokens(t_parser *parser, t_dll *tokens)
 	int				skip;
 	t_token_type	token_type;
 
+	token = NULL;
 	skip = 0;
 	token_type = get_next_token(parser->stack, tokens, skip, &token);
 	parser->step = get_next_step(parser, token_type);
