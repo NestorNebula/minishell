@@ -6,13 +6,13 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 14:03:26 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/11 16:18:05 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:05:15 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "parser.h"
-#include "parser-helpers.h"
+#include "parser_helpers.h"
 
 t_parsing_table	build_parsing_table(void)
 {

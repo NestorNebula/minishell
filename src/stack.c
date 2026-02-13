@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/12 08:59:03 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/12 09:07:45 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/13 12:06:06 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	stack_shift(t_stack *stack, int n)
 	stack->content[stack->len++] = n;
 }
 
-int		stack_pop(t_stack *stack)
+int	stack_pop(t_stack *stack)
 {
 	if (stack == NULL || stack->len == 0)
 		return (0);
