@@ -9,7 +9,7 @@ RMFLAGS = -r -f
 TESTS_DIR = src
 
 TESTS = $(TESTS_DIR)/dll.c $(TESTS_DIR)/command.c $(TESTS_DIR)/file.c \
-		$(TESTS_DIR)/filepath.c $(TESTS_DIR)/stack.c
+		$(TESTS_DIR)/filepath.c $(TESTS_DIR)/stack.c $(TESTS_DIR)/parser.c
 
 TESTS_EXECS = $(TESTS:.c=.out)
 
@@ -20,7 +20,11 @@ INCLUDE_DIR = $(ROOT_DIR)/include
 SRC_DIR = $(ROOT_DIR)/src
 
 SRC = $(SRC_DIR)/dll.c $(SRC_DIR)/dll-helpers.c $(SRC_DIR)/command.c \
-	  $(SRC_DIR)/file.c $(SRC_DIR)/filepath.c $(SRC_DIR)/stack.c
+	  $(SRC_DIR)/file.c $(SRC_DIR)/filepath.c $(SRC_DIR)/stack.c \
+	  $(SRC_DIR)/parser.c \
+	  $(SRC_DIR)/parsing-table/build-parsing-table.c \
+	  $(SRC_DIR)/parsing-table/parser-helpers1.c \
+	  $(SRC_DIR)/parsing-table/parser-helpers2.c
 
 OBJ = $(SRC:.c=.o)
 
