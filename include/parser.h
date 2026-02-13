@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "dll.h"
+# include "stack.h"
 # include "token.h"
 
 # define STATES_COUNT 31
@@ -53,6 +54,14 @@ typedef struct s_step
 }	t_step;
 
 typedef t_step	*t_parsing_table;
+
+typedef struct s_parser
+{
+	t_parsing_table	parsing_table;
+	int				state;
+	t_step			*step;
+	t_stack			*stack;
+}	t_parser;
 
 /**
  * Initializes a parsing table and sets every step inside of it.
