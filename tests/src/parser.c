@@ -66,7 +66,7 @@ static void		test_parse_tokens(void)
 	test_parse_tokens_valid(parsing_table, (t_token_type[]){T_REDIR_APPEND, T_WORD}, 2, "parse_tokens (redir append token)");
 	test_parse_tokens_valid(parsing_table, (t_token_type[]){T_HEREDOC, T_WORD}, 2, "parse_tokens (heredoc token)");
 	test_parse_tokens_valid(parsing_table, (t_token_type[]){T_WORD, T_WORD, T_PIPE, T_WORD, T_WORD}, 5, "parse_tokens (words separed by pipe token)");
-	test_parse_tokens_valid(parsing_table, (t_token_type[]){T_REDIR_IN, T_WORD, T_WORD, T_REDIR_OUT, T_WORD, T_PIPE, T_HEREDOC, T_WORD, T_WORD, T_WORD, T_REDIR_OUT, T_WORD}, 12, "parse_tokens (multi-tokens (redirections, words and pipe)");
+	test_parse_tokens_valid(parsing_table, (t_token_type[]){T_REDIR_IN, T_WORD, T_WORD, T_REDIR_OUT, T_WORD, T_PIPE, T_HEREDOC, T_WORD, T_WORD, T_WORD, T_REDIR_OUT, T_WORD}, 12, "parse_tokens (multi-tokens (redirections, words and pipe))");
 	test_parse_tokens_invalid(parsing_table, (t_token_type[]){T_REDIR_IN}, 1, T_REDIR_IN, "parse_tokens (redir input token alone)");
 	test_parse_tokens_invalid(parsing_table, (t_token_type[]){T_REDIR_OUT}, 1, T_REDIR_OUT, "parse_tokens (redir output token alone)");
 	test_parse_tokens_invalid(parsing_table, (t_token_type[]){T_REDIR_APPEND}, 1, T_REDIR_APPEND, "parse_tokens (redir append token alone)");
@@ -80,6 +80,7 @@ static void		test_parse_tokens(void)
 	test_parse_tokens_invalid(parsing_table, (t_token_type[]){T_REDIR_OUT, T_REDIR_OUT, T_WORD}, 3, T_REDIR_OUT, "parse_tokens (double redir output token)");
 	test_parse_tokens_invalid(parsing_table, (t_token_type[]){T_REDIR_APPEND, T_REDIR_APPEND, T_WORD}, 3, T_REDIR_APPEND, "parse_tokens (double redir append token)");
 	test_parse_tokens_invalid(parsing_table, (t_token_type[]){T_HEREDOC, T_HEREDOC, T_WORD}, 3, T_HEREDOC, "parse_tokens (double heredoc token)");
+	free(parsing_table);
 }
 
 static void		test_parse_tokens_valid(t_parsing_table parsing_table,
