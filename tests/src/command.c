@@ -1,7 +1,15 @@
 #include "command.h"
 #include "cut.h"
 
-void	new_command_test(void)
+static void	new_command_test(void);
+
+int	main(void)
+{
+	new_command_test();
+	return (0);
+}
+
+static void	new_command_test(void)
 {
 	t_unit_test	*unit_test;
 	t_command	*command;
@@ -26,10 +34,4 @@ void	new_command_test(void)
 		"sets command's out_fds to NULL");
 	free_command(command);
 	end_unit_test(unit_test);
-}
-
-int	main(void)
-{
-	new_command_test();
-	return (0);
 }
