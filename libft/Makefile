@@ -27,7 +27,7 @@ SRC = $(SRC_DIR)/ft_isalpha.c $(SRC_DIR)/ft_isdigit.c $(SRC_DIR)/ft_isalnum.c \
 	  $(SRC_DIR)/ft_itoa.c $(SRC_DIR)/ft_strmapi.c $(SRC_DIR)/ft_striteri.c \
 	  $(SRC_DIR)/ft_putchar_fd.c $(SRC_DIR)/ft_putstr_fd.c \
 	  $(SRC_DIR)/ft_putendl_fd.c $(SRC_DIR)/ft_putnbr_fd.c \
-	  $(SRC_DIR)/ft_free_arr.c \
+	  $(SRC_DIR)/ft_free_arr.c $(SRC_DIR)/ft_close.c \
 	  $(SRC_DIR)/ft_printf/conv.c $(SRC_DIR)/ft_printf/ft_itoa_base.c \
 	  $(SRC_DIR)/ft_printf/ft_pitoa_base.c $(SRC_DIR)/ft_printf/ft_printf.c \
 	  $(SRC_DIR)/ft_printf/ft_dprintf.c $(SRC_DIR)/ft_printf/libft-string.c \
