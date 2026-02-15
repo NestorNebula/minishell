@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
+#ifndef BUILD_COMMANDS_H
+# define BUILD_COMMANDS_H
+
+# include "dll.h"
 
 /**
  * Creates a list of commands from a list of tokens.
@@ -21,13 +24,15 @@
  * @return A pointer to the first element of a dll of commands on success,
  * a NULL pointer on error
  */
-t_dll		*build_commands(t_dll *tokens);
+t_dll	*build_commands(t_dll *tokens);
 
 /**
  * Updates i/o files for each command in a command list.
- * Removes STD i/o from i/o list if there are other files in the list.
- * Replaces STD i/o by pipes if other commands are in the list.
+ * Removes standard i/o from i/o list if there are other files in the list.
+ * Replaces standard i/o by pipes if other commands are in the list.
  *
  * @param commands A pointer to the first element of a dll of commands
  */
-void		update_commands_files(t_dll *commands);
+void	update_commands_files(t_dll *commands);
+
+#endif // !BUILD_COMMANDS_H

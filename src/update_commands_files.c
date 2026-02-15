@@ -15,7 +15,7 @@
 #include "file.h"
 
 static void	update_command_files(t_command *command, t_dll *command_node,
-						size_t in_size, size_t out_size);
+				size_t in_size, size_t out_size);
 
 void	update_commands_files(t_dll *commands)
 {
@@ -30,9 +30,8 @@ void	update_commands_files(t_dll *commands)
 	}
 }
 
-
 static void	update_command_files(t_command *command, t_dll *command_node,
-						size_t in_size, size_t out_size)
+				size_t in_size, size_t out_size)
 {
 	t_dll	*next;
 

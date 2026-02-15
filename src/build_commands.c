@@ -26,8 +26,7 @@ static t_file		*set_command_file(t_command *command, t_dll **tokens_ptr);
 
 static t_file		*get_command_file(t_dll **tokens_ptr);
 
-
-t_dll		*build_commands(t_dll *tokens)
+t_dll	*build_commands(t_dll *tokens)
 {
 	t_dll		*commands;
 	t_dll		*command_node;
@@ -50,8 +49,6 @@ t_dll		*build_commands(t_dll *tokens)
 			return (NULL);
 		}
 		add_dll(&commands, command_node);
-		if (tokens != NULL && ((t_token *)tokens->data)->type == T_PIPE)
-			tokens = tokens->next;
 	}
 	update_commands_files(commands);
 	return (commands);
@@ -68,6 +65,8 @@ static t_command	*build_command(t_dll **tokens_ptr)
 	command = new_command(NULL);
 	if (command == NULL)
 		return (NULL);
+	if (((t_token *)(*tokens_ptr)->data)->type == T_PIPE)
+		*tokens_ptr = (*tokens_ptr)->next;
 	token = (*tokens_ptr)->data;
 	while (token != NULL && token->type != T_END && token->type != T_PIPE)
 	{
@@ -84,7 +83,7 @@ static t_command	*build_command(t_dll **tokens_ptr)
 	return (command);
 }
 
-static char			**set_command_args(t_command *command, t_dll **tokens_ptr)
+static char	**set_command_args(t_command *command, t_dll **tokens_ptr)
 {
 	size_t	i;
 	t_dll	*token;
@@ -103,7 +102,7 @@ static char			**set_command_args(t_command *command, t_dll **tokens_ptr)
 	while (*tokens_ptr != NULL
 		&& ((t_token *)(*tokens_ptr)->data)->type == T_WORD)
 	{
-		command->args[i] = ft_strdup(((t_token *) (*tokens_ptr)->data)->value);
+		command->args[i] = ft_strdup(((t_token *)(*tokens_ptr)->data)->value);
 		if (command->args[i++] == NULL)
 			return (NULL);
 		*tokens_ptr = (*tokens_ptr)->next;
@@ -112,7 +111,7 @@ static char			**set_command_args(t_command *command, t_dll **tokens_ptr)
 	return (command->args);
 }
 
-static t_file		*set_command_file(t_command *command, t_dll **tokens_ptr)
+static t_file	*set_command_file(t_command *command, t_dll **tokens_ptr)
 {
 	t_dll		*file_node;
 	t_file		*file;
@@ -136,7 +135,7 @@ static t_file		*set_command_file(t_command *command, t_dll **tokens_ptr)
 	return (file);
 }
 
-static t_file		*get_command_file(t_dll **tokens_ptr)
+static t_file	*get_command_file(t_dll **tokens_ptr)
 {
 	t_file		*file;
 	t_file_type	type;
