@@ -6,13 +6,14 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:29:25 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/04 14:16:49 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/15 14:38:21 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "command.h"
 #include "file.h"
+#include "libft.h"
 
 static t_command	*set_command_default_files(t_command *command);
 
@@ -38,6 +39,11 @@ t_command	*new_command(const char **raw_argv)
 
 void	free_command(void *command)
 {
+	ft_free_arr(((t_command *) command)->args, free);
+	if (((t_command *) command)->filepath != NULL)
+		free(((t_command *) command)->filepath);
+	clear_dll(&((t_command *) command)->in_files, free_file);
+	clear_dll(&((t_command *) command)->out_files, free_file);
 	free(command);
 }
 
