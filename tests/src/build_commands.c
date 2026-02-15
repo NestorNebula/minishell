@@ -151,6 +151,7 @@ static void	init_build_commands_test(t_token *tokens_arr, size_t size,
 	tokens = tokens_from_array(tokens_arr, size);
 	cut_assert(tokens != NULL, *unit_test_ptr, "tokens initialization succeeds");
 	*commands_ptr = build_commands(tokens);
+	clear_dll(&tokens, free);
 	cut_assert(*commands_ptr != NULL, *unit_test_ptr,
 		"returns non-null pointer on list of commands");
 }
