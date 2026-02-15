@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 11:04:55 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/15 11:17:33 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/15 11:49:53 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static char			**set_command_args(t_command *command, t_dll **tokens_ptr)
 
 	i = 0;
 	token = *tokens_ptr;
-	while (token != NULL && ((t_token *) token)->type == T_WORD)
+	while (token != NULL && ((t_token *) token->data)->type == T_WORD)
 	{
 		i++;
 		token = token->next;
