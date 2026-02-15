@@ -1,5 +1,6 @@
 #include "command.h"
 #include "cut.h"
+#include "file.h"
 
 static void	new_command_test(void);
 
@@ -28,10 +29,12 @@ static void	new_command_test(void)
 		"sets command's pid to -1");
 	cut_expect(command->wstatus == -1, unit_test,
 		"sets command's wstatus to -1");
-	cut_expect(command->in_files == NULL, unit_test,
-		"sets command's in_fds to NULL");
-	cut_expect(command->out_files == NULL, unit_test,
-		"sets command's out_fds to NULL");
+	cut_expect(dll_size(command->in_files) == 1
+			&& ((t_file *) command->in_files->data)->type == FILE_STD,
+		unit_test, "sets command's input file to default (STD file)");
+	cut_expect(dll_size(command->out_files) == 1
+			&& ((t_file *) command->out_files->data)->type == FILE_STD,
+		unit_test, "sets command's output file to default (STD file)");
 	free_command(command);
 	end_unit_test(unit_test);
 }
