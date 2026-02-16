@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 12:28:40 by nhoussie          #+#    #+#             */
-/*   Updated: 2025/11/25 09:30:21 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/15 14:59:11 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int		ft_printf(const char *format, ...);
 int		ft_dprintf(int fd, const char *format, ...);
 
 void	ft_free_arr(void *arr, void (*free_item)(void *));
+int		ft_close(int fd);
 
 #endif /* end of include guard: LIBFT_H */
