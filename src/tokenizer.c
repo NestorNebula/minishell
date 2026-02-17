@@ -22,12 +22,12 @@ static char	*read_word(char *line, int *i)
 	quote = 0;
 	while (line[*i])
 	{
-		if (!quote && (line[*i] == '\'') || line[*i] == '"')
+		if (!quote && (line[*i] == '\'' || line[*i] == '"'))
 			quote = line[*i];
 		else if (quote && line[*i] == quote)
 			quote = 0;
-		else if (!quote && (line[*i] == ' ') || (line[*i] == '\t')
-			|| line[*i] == '|' || line[*i] == '<' || line[*i] == '>')
+		else if (!quote && (line[*i] == ' ' || line[*i] == '\t'
+			|| line[*i] == '|' || line[*i] == '<' || line[*i] == '>'))
 			break ;
 		(*i)++;
 	}
