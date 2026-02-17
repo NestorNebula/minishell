@@ -24,7 +24,7 @@ static char	*read_word(char *line, int *i)
 	{
 		if (!quote && (line[*i] == '\'') || line[*i] == '"')
 			quote = line[*i];
-		else if (!quote && line[*i] == quote)
+		else if (quote && line[*i] == quote)
 			quote = 0;
 		else if (!quote && (line[*i] == ' ') || (line[*i] == '\t')
 			|| line[*i] == '|' || line[*i] == '<' || line[*i] == '>')
@@ -81,6 +81,7 @@ static void	*double_operator(t_dll **tokens, char *line, int *i)
 t_dll	*tokenizer(char *line)
 {
 	t_dll	*tokens;
+	t_token	*tok;
 	int		i;
 
 	tokens = NULL;
@@ -95,6 +96,11 @@ t_dll	*tokenizer(char *line)
 				double_operator(&tokens, line[i], &i);
 			else
 				one_operator(&tokens, line[i], &i);
+		}
+		else
+		{
+			tok = new_token(T_WORD, read_word(line, &i));
+			add_dll(&tokens, new_dll(tok));
 		}
 	}
 	return (tokens);
