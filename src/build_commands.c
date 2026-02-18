@@ -142,6 +142,8 @@ static t_file	*get_command_file(t_dll **tokens_ptr)
 	int			flags;
 	t_token		*token;
 
+	type = FILE_STD;
+	flags = 0;
 	token = (*tokens_ptr)->data;
 	if (token->type == T_REDIR_IN || token->type == T_REDIR_OUT
 		|| token->type == T_REDIR_APPEND)
