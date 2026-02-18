@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <unistd.h>
 #include "builtins.h"
 #include "libft.h"
 
@@ -18,9 +19,9 @@ static int	echo(char **args, char *option);
 
 int	builtin_echo(t_command *command, t_shell *shell)
 {
-	int		rc;
 	char	*option;
 
+	(void) shell;
 	option = NULL;
 	if (command->args != NULL && command->args[1] != NULL
 		&& ft_strncmp(command->args[1], "-n", 2) == 0
@@ -48,6 +49,8 @@ static int	echo(char **args, char *option)
 		}
 		i++;
 	}
+	if (!option)
+		write(1, "\n", 1);
 	if (rc == -1)
 		return (errno);
 	return (0);
