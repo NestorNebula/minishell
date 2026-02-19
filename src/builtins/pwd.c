@@ -28,7 +28,9 @@ int				builtin_pwd(t_command *command, t_shell *shell)
 		return (errno);
 	rc = ft_printf("%s\n", cwd);
 	if (rc == -1)
-		return (errno);
+		rc = errno;
+	else
+		rc = 0;
 	free(cwd);
-	return (0);
+	return (rc);
 }
