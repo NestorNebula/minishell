@@ -16,7 +16,7 @@
 #include "builtins.h"
 #include "libft.h"
 
-int				builtin_pwd(t_command *command, t_shell *shell)
+int	builtin_pwd(t_command *command, t_shell *shell)
 {
 	int		rc;
 	char	*cwd;

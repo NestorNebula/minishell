@@ -27,7 +27,7 @@ t_builtin_fn	get_builtin(const char *name)
 	{"exit", builtin_exit},
 	};
 	size_t					i;
-	
+
 	i = 0;
 	while (i < BUILTINS_COUNT
 		&& ft_strncmp(builtins[i].name, name, ft_strlen(name) + 1) != 0)
