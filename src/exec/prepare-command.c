@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:59:03 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 12:18:11 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/19 14:37:22 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "exec.h"
 #include "file.h"
+#include "filepath.h"
 
 static int	prepare_stds(t_command *command, t_command *prev);
 
@@ -30,8 +31,8 @@ int	prepare_command(t_dll *command_node)
 		prev = NULL;
 	else
 		prev = command_node->prev->data;
-	if (rc != 0)
-		return (rc);
+	if (command->args != NULL)
+		command->filepath = find_filepath(command->args[0]);
 	rc = prepare_stds(command, prev);
 	return (rc);
 }
