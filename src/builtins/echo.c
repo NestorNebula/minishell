@@ -49,9 +49,11 @@ static int	echo(char **args, char *option)
 		}
 		i++;
 	}
-	if (!option)
-		write(1, "\n", 1);
 	if (rc == -1)
-		return (errno);
-	return (0);
+		rc = errno;
+	else
+		rc = 0;
+	if (!option)
+		write(STDOUT_FILENO, "\n", 1);
+	return (rc);
 }
