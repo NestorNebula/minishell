@@ -12,9 +12,9 @@
 
 #include <errno.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "builtins.h"
-#include "libft.h"
 
 int	builtin_pwd(t_command *command, t_shell *shell)
 {
@@ -26,7 +26,7 @@ int	builtin_pwd(t_command *command, t_shell *shell)
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 		return (errno);
-	rc = ft_printf("%s\n", cwd);
+	rc = printf("%s\n", cwd);
 	if (rc == -1)
 		rc = errno;
 	else

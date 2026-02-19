@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "builtins.h"
 #include "libft.h"
@@ -43,9 +44,9 @@ static int	echo(char **args, char *option)
 		if (args[i] != option && ft_strlen(args[i]) > 0)
 		{
 			if (count++ > 0)
-				rc = ft_printf(" %s", args[i]);
+				rc = printf(" %s", args[i]);
 			else
-				rc = ft_printf("%s", args[i]);
+				rc = printf("%s", args[i]);
 		}
 		i++;
 	}

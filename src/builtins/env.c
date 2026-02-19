@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <stdio.h>
 #include "builtins.h"
-#include "libft.h"
 #include "env.h"
 
 int	builtin_env(t_command *command, t_shell *shell)
@@ -28,7 +28,7 @@ int	builtin_env(t_command *command, t_shell *shell)
 	{
 		env_var = env_ptr->data;
 		if (env_var != NULL)
-			rc = ft_printf("%s=%s\n", env_var->key, env_var->value);
+			rc = printf("%s=%s\n", env_var->key, env_var->value);
 		env_ptr = env_ptr->next;
 	}
 	if (rc == -1)
