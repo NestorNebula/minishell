@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 11:37:45 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 14:37:58 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:23:05 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	handle_command(t_dll *command_node, t_shell *shell)
 	if (rc == 0)
 		handle_child(command_node, shell);
 	else if (rc > 0)
-	{
-		handle_parent(command, rc);
-		rc = 0;
-	}
+		rc = handle_parent(command, rc);
 	else
 		rc = errno;
 	close_files(command);

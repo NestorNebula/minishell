@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:06:08 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 14:36:20 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:21:01 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int		handle_child(t_dll *command_node, t_shell *shell);
  *
  * @param command A pointer to a command structure
  * @param pid The process id of the child currently executing
+ * @return Always 0
  */
-void	handle_parent(t_command *command, int pid);
+int		handle_parent(t_command *command, int pid);
 
 /**
  * Waits for every child process currently executing to terminate.
