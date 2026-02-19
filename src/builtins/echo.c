@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 11:13:55 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/17 11:38:23 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/19 15:53:57 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ static int	echo(char **args, char *option)
 	else
 		rc = 0;
 	if (!option)
-		write(STDOUT_FILENO, "\n", 1);
+		printf("\n");
 	return (rc);
 }
