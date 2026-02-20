@@ -43,24 +43,23 @@ static int	prepare_stds(t_command *command, t_command *prev)
 	t_file	*last_in;
 	t_file	*last_out;
 
+	if (command->in_files == NULL || command->out_files == NULL)
+		return (EBADF);
 	rc = 0;
-	last_in = NULL;
-	if (command->in_files != NULL)
-		last_in = dll_last(command->in_files)->data;
-	last_out = NULL;
-	if (command->out_files != NULL)
-		last_out = dll_last(command->out_files)->data;
-	if (last_in != NULL && last_in->type == FILE_PIPE
-		&& prev != NULL && dup2(prev->pipe[0], STDIN_FILENO) == -1)
+	last_in = dll_last(command->in_files)->data;
+	last_out = dll_last(command->out_files)->data;
+	if (last_in->type == FILE_PIPE && prev != NULL
+		&& dup2(prev->pipe[0], STDIN_FILENO) == -1)
 		rc = errno;
-	else if (last_in != NULL && dup2(last_in->fd, STDIN_FILENO) == -1)
+	else if (last_in->type != FILE_PIPE && dup2(last_in->fd, STDIN_FILENO) == -1)
 		rc = errno;
-	if (last_out == NULL || last_out->type != FILE_PIPE)
+	if (last_out->type != FILE_PIPE)
 		close(command->pipe[1]);
-	if (last_out != NULL && last_out->type == FILE_PIPE
+	if (last_out->type == FILE_PIPE
 		&& dup2(command->pipe[1], STDOUT_FILENO) == -1)
 		rc = errno;
-	else if (last_out != NULL && dup2(last_out->fd, STDIN_FILENO) == -1)
+	else if (last_out->type != FILE_PIPE
+		&& dup2(last_out->fd, STDOUT_FILENO) == -1)
 		rc = errno;
 	return (rc);
 }
