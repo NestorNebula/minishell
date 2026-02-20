@@ -48,7 +48,9 @@ static int	read_heredoc(const char *delimiter, int fd)
 	write(STDOUT_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	rc = 0;
-	while (line != NULL && ft_strncmp(line, delimiter, delimiter_len + 1) != 0)
+	while (line != NULL
+		&& (ft_strncmp(line, delimiter, delimiter_len) != 0
+			|| line[delimiter_len] != '\n'))
 	{
 		if (ft_dprintf(fd, "%s", line) == -1)
 			rc = -1;
