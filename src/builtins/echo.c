@@ -11,37 +11,56 @@
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "builtins.h"
 #include "libft.h"
 
-static int	echo(char **args, char *option);
+#define OPT_LEN 2
+
+static bool	has_option(const char *arg);
+
+static int	echo(char **args, bool n_option);
 
 int	builtin_echo(t_command *command, t_shell *shell)
 {
-	char	*option;
+	size_t	options_count;
 
 	(void) shell;
-	option = NULL;
-	if (command->args != NULL && command->args[1] != NULL
-		&& ft_strncmp(command->args[1], "-n", 2) == 0
-		&& ft_strchr(command->args[1], ' ') == NULL)
-		option = command->args[1];
-	return (echo(command->args + 1, option));
+	options_count = 0;
+	while (has_option(command->args[options_count + 1]))
+		options_count++;
+	return (echo(command->args + options_count + 1, options_count != 0));
 }
 
-static int	echo(char **args, char *option)
+static bool	has_option(const char *arg)
+{
+	bool	success;
+	size_t	i;
+
+	if (arg == NULL || ft_strncmp(arg, "-n", OPT_LEN) != 0)
+		return (false);
+	i = OPT_LEN;
+	success = true;
+	while (arg[i] != '\0' && success)
+		if (arg[i++] != 'n')
+			success = false;
+	return (success);
+}
+
+static int	echo(char **args, bool n_option)
 {
 	int		rc;
 	size_t	i;
 	size_t	count;
 
+	rc = 0;
 	count = 0;
 	i = 0;
 	while (args[i] != NULL)
 	{
-		if (args[i] != option && ft_strlen(args[i]) > 0)
+		if (ft_strlen(args[i]) > 0)
 		{
 			if (count++ > 0)
 				rc = printf(" %s", args[i]);
@@ -54,7 +73,7 @@ static int	echo(char **args, char *option)
 		rc = errno;
 	else
 		rc = 0;
-	if (!option)
+	if (!n_option)
 		printf("\n");
 	return (rc);
 }
