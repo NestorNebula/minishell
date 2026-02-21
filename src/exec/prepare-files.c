@@ -45,12 +45,11 @@ static int	prepare_inputs(t_dll *inputs)
 	while (inputs != NULL && inputs->data != NULL && rc == 0)
 	{
 		file = inputs->data;
-		file->fd = 0;
 		if (file->type == FILE_HEREDOC)
 			file->fd = get_heredoc(file->path);
 		else if (file->type == FILE_REG)
 			file->fd = open(file->path, file->flags);
-		if (file->fd == -1)
+		if ((file->type == FILE_HEREDOC || file->type == FILE_REG) && file->fd == -1)
 			rc = errno;
 		file->err_code = rc;
 		if (file->err_code == 0)
@@ -71,10 +70,9 @@ static int	prepare_outputs(t_dll *outputs)
 	while (outputs != NULL && outputs->data != NULL && rc == 0)
 	{
 		file = outputs->data;
-		file->fd = 0;
 		if (file->type == FILE_REG)
 			file->fd = open(file->path, file->flags, 0644);
-		if (file->fd == -1)
+		if (file->type == FILE_REG && file->fd == -1)
 			rc = errno;
 		file->err_code = rc;
 		if (file->err_code == 0)
