@@ -51,14 +51,15 @@ static int	prepare_stds(t_command *command, t_command *prev)
 	if (last_in->type == FILE_PIPE && prev != NULL
 		&& dup2(prev->pipe[0], STDIN_FILENO) == -1)
 		rc = errno;
-	else if (last_in->type != FILE_PIPE && dup2(last_in->fd, STDIN_FILENO) == -1)
+	else if (last_in->type != FILE_PIPE
+		&& last_in->type != FILE_STD
+		&& dup2(last_in->fd, STDIN_FILENO) == -1)
 		rc = errno;
-	if (last_out->type != FILE_PIPE)
-		close(command->pipe[1]);
 	if (last_out->type == FILE_PIPE
 		&& dup2(command->pipe[1], STDOUT_FILENO) == -1)
 		rc = errno;
 	else if (last_out->type != FILE_PIPE
+		&& last_out->type != FILE_STD
 		&& dup2(last_out->fd, STDOUT_FILENO) == -1)
 		rc = errno;
 	return (rc);
