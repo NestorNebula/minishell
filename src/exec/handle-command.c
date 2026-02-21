@@ -41,7 +41,7 @@ int	handle_command(t_dll *command_node, t_shell *shell)
 		rc = handle_parent(command, rc);
 	else
 		rc = errno;
-	close_files(command);
+	close_files(command_node);
 	return (rc);
 }
 
