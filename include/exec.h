@@ -58,8 +58,9 @@ int		exec_command(t_command *command, t_shell *shell);
 /**
  * Closes all input/output files used by the given command.
  *
- * @param command A pointer to a command structure
+ * @param command_node A pointer to a dll node containing
+ * a pointer to a command structure
  */
-void	close_files(t_command *command);
+void	close_files(t_dll *command_node);
 
 #endif // !EXEC_H
