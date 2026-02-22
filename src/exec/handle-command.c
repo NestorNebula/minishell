@@ -28,7 +28,7 @@ int	handle_command(t_dll *command_node, t_shell *shell)
 	command = command_node->data;
 	if (pipe(command->pipe) == -1)
 		return (errno);
-	rc = prepare_files(command);
+	rc = prepare_files(command_node);
 	if (rc != 0)
 		return (rc);
 	rc = handle_builtin(command_node, shell);
