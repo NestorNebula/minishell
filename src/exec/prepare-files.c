@@ -12,31 +12,34 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include "exec.h"
 #include "file.h"
 #include "heredoc.h"
 
-static int	prepare_inputs(t_dll *inputs);
+static int	prepare_inputs(t_dll *command_node, t_dll *inputs);
 
-static int	prepare_outputs(t_dll *outputs);
+static int	prepare_outputs(t_dll *command_node, t_dll *outputs);
 
-int	prepare_files(t_command *command)
+int		prepare_files(t_dll *command_node)
 {
-	int		rc;
+	int			rc;
+	t_command	*command;
 
-	if (command == NULL)
+	if (command_node == NULL || command_node->data == NULL)
 		return (0);
+	command = command_node->data;
 	rc = 0;
 	if (command->in_files != NULL)
-		rc = prepare_inputs(command->in_files);
+		rc = prepare_inputs(command_node, command->in_files);
 	if (rc != 0)
 		return (rc);
 	if (command->out_files != NULL)
-		rc = prepare_outputs(command->out_files);
+		rc = prepare_outputs(command_node, command->out_files);
 	return (rc);
 }
 
-static int	prepare_inputs(t_dll *inputs)
+static int	prepare_inputs(t_dll *command_node, t_dll *inputs)
 {
 	int		rc;
 	t_file	*file;
@@ -49,7 +52,11 @@ static int	prepare_inputs(t_dll *inputs)
 			file->fd = get_heredoc(file->path);
 		else if (file->type == FILE_REG)
 			file->fd = open(file->path, file->flags);
-		if ((file->type == FILE_HEREDOC || file->type == FILE_REG) && file->fd == -1)
+		else if (file->type == FILE_STD)
+			file->fd = STDIN_FILENO;
+		else if (file->type == FILE_PIPE && command_node->prev != NULL)
+			file->fd = ((t_command *) command_node->prev->data)->pipe[0];
+		if (file->fd == -1)
 			rc = errno;
 		file->err_code = rc;
 		if (file->err_code == 0)
@@ -61,7 +68,7 @@ static int	prepare_inputs(t_dll *inputs)
 	return (rc);
 }
 
-static int	prepare_outputs(t_dll *outputs)
+static int	prepare_outputs(t_dll *command_node, t_dll *outputs)
 {
 	int		rc;
 	t_file	*file;
@@ -72,7 +79,11 @@ static int	prepare_outputs(t_dll *outputs)
 		file = outputs->data;
 		if (file->type == FILE_REG)
 			file->fd = open(file->path, file->flags, 0644);
-		if (file->type == FILE_REG && file->fd == -1)
+		else if (file->type == FILE_STD)
+			file->fd = STDOUT_FILENO;
+		else if (file->type == FILE_PIPE)
+			file->fd = ((t_command *) command_node->data)->pipe[1];
+		if (file->fd == -1)
 			rc = errno;
 		file->err_code = rc;
 		if (file->err_code == 0)
