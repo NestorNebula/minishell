@@ -12,14 +12,18 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <string.h>
 #include <unistd.h>
 #include "exec.h"
 #include "file.h"
 #include "heredoc.h"
+#include "libft.h"
 
 static int	prepare_inputs(t_dll *command_node, t_dll *inputs);
 
 static int	prepare_outputs(t_dll *command_node, t_dll *outputs);
+
+static int	handle_file_status(t_file *file);
 
 int		prepare_files(t_dll *command_node)
 {
@@ -56,13 +60,7 @@ static int	prepare_inputs(t_dll *command_node, t_dll *inputs)
 			file->fd = STDIN_FILENO;
 		else if (file->type == FILE_PIPE && command_node->prev != NULL)
 			file->fd = ((t_command *) command_node->prev->data)->pipe[0];
-		if (file->fd == -1)
-			rc = errno;
-		file->err_code = rc;
-		if (file->err_code == 0)
-			file->status = FILE_OK;
-		else
-			file->status = FILE_ERR;
+		rc = handle_file_status(file);
 		inputs = inputs->next;
 	}
 	return (rc);
@@ -83,14 +81,22 @@ static int	prepare_outputs(t_dll *command_node, t_dll *outputs)
 			file->fd = STDOUT_FILENO;
 		else if (file->type == FILE_PIPE)
 			file->fd = ((t_command *) command_node->data)->pipe[1];
-		if (file->fd == -1)
-			rc = errno;
-		file->err_code = rc;
-		if (file->err_code == 0)
-			file->status = FILE_OK;
-		else
-			file->status = FILE_ERR;
+		handle_file_status(file);
 		outputs = outputs->next;
 	}
 	return (rc);
+}
+
+static int	handle_file_status(t_file *file)
+{
+	if (file->fd != -1)
+	{
+		file->err_code = 0;
+		file->status = FILE_OK;
+		return (0);
+	}
+	file->err_code = errno;
+	file->status = FILE_ERR;
+	ft_dprintf(STDERR_FILENO, "%s: %s\n", file->path, strerror(file->err_code));
+	return (file->err_code);
 }
