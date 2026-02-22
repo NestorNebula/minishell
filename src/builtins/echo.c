@@ -13,6 +13,7 @@
 #include <errno.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include "builtins.h"
 #include "file.h"
@@ -26,6 +27,7 @@ static int	echo(char **args, int fd, bool n_option);
 
 int	builtin_echo(t_command *command, t_shell *shell)
 {
+	int		rc;
 	size_t	options_count;
 	int		fd;
 
@@ -36,7 +38,10 @@ int	builtin_echo(t_command *command, t_shell *shell)
 	fd = STDOUT_FILENO;
 	if (dll_size(shell->cmds) == 1)
 		fd = ((t_file *) dll_last(command->out_files)->data)->fd;
-	return (echo(command->args + options_count + 1, fd, options_count != 0));
+	rc = echo(command->args + options_count + 1, fd, options_count != 0);
+	if (rc != 0)
+		ft_dprintf(STDERR_FILENO, "echo: %s\n", strerror(rc));
+	return (rc);
 }
 
 static bool	has_option(const char *arg)

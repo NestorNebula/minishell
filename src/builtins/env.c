@@ -12,6 +12,7 @@
 
 #include <errno.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include "builtins.h"
 #include "env.h"
@@ -39,6 +40,10 @@ int	builtin_env(t_command *command, t_shell *shell)
 		env_ptr = env_ptr->next;
 	}
 	if (rc == -1)
-		return (errno);
+	{
+		rc = errno;
+		ft_dprintf(STDERR_FILENO, "env: %s\n", strerror(errno));
+		return (rc);
+	}
 	return (0);
 }

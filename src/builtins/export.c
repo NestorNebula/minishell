@@ -12,6 +12,7 @@
 
 #include <errno.h>
 #include <stdbool.h>
+#include <string.h>
 #include <unistd.h>
 #include "builtins.h"
 #include "env.h"
@@ -66,6 +67,7 @@ static bool	is_valid_key(const char *key)
 
 static int	export_env_var(t_shell *shell, char *env_str)
 {
+	int		rc;
 	size_t	key_len;
 	void	*rp;
 
@@ -74,6 +76,10 @@ static int	export_env_var(t_shell *shell, char *env_str)
 	rp = set_env_var(&shell->env, env_str, env_str + key_len + 1);
 	env_str[key_len] = '=';
 	if (rp == NULL)
-		return (errno);
+	{
+		rc = errno;
+		ft_dprintf(STDERR_FILENO, "export: %s\n", strerror(rc));
+		return (rc);
+	}
 	return (0);
 }

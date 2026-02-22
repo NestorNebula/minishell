@@ -13,6 +13,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include "builtins.h"
 #include "file.h"
@@ -34,7 +35,10 @@ int	builtin_pwd(t_command *command, t_shell *shell)
 		fd = ((t_file *) dll_last(command->out_files)->data)->fd;
 	rc = ft_dprintf(fd, "%s\n", cwd);
 	if (rc == -1)
+	{
 		rc = errno;
+		ft_dprintf(STDERR_FILENO, "pwd: %s\n", strerror(rc));
+	}
 	else
 		rc = 0;
 	free(cwd);
