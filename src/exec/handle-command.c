@@ -16,7 +16,7 @@
 #include "exec.h"
 #include "process.h"
 
-static int	handle_builtin(t_command *command, t_shell *shell);
+static int	handle_builtin(t_dll *command_node, t_shell *shell);
 
 int	handle_command(t_dll *command_node, t_shell *shell)
 {
@@ -31,7 +31,7 @@ int	handle_command(t_dll *command_node, t_shell *shell)
 	rc = prepare_files(command);
 	if (rc != 0)
 		return (rc);
-	rc = handle_builtin(command, shell);
+	rc = handle_builtin(command_node, shell);
 	if (rc != -1)
 		return (rc);
 	rc = fork();
@@ -45,11 +45,13 @@ int	handle_command(t_dll *command_node, t_shell *shell)
 	return (rc);
 }
 
-static int	handle_builtin(t_command *command, t_shell *shell)
+static int	handle_builtin(t_dll *command_node, t_shell *shell)
 {
 	int				rc;
+	t_command		*command;
 	t_builtin_fn	builtin;
 	
+	command = command_node->data;
 	if (dll_size(shell->cmds) != 1 || command->args == NULL)
 		return (-1);
 	builtin = get_builtin(command->args[0]);
@@ -57,5 +59,6 @@ static int	handle_builtin(t_command *command, t_shell *shell)
 		return (-1);
 	rc = builtin(command, shell);
 	command->wstatus = rc << 8;
+	close_files(command_node);
 	return (rc);
 }
