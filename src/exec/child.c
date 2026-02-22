@@ -11,12 +11,17 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
+#include "builtins.h"
 #include "exec.h"
 #include "env.h"
+#include "libft.h"
 #include "process.h"
 
 static void	exit_from_child(int ec, t_dll *command_node, t_shell *shell);
+
+static void	display_exec_error(t_command *command, int *ec);
 
 int	handle_child(t_dll *command_node, t_shell *shell)
 {
@@ -32,6 +37,7 @@ int	handle_child(t_dll *command_node, t_shell *shell)
 	if (ec != 0)
 		exit_from_child(ec, NULL, shell);
 	ec = exec_command(command, shell);
+	display_exec_error(command, &ec);
 	exit_from_child(ec, NULL, shell);
 	exit(ec);
 }
@@ -46,4 +52,31 @@ static void	exit_from_child(int ec, t_dll *command_node, t_shell *shell)
 		clear_dll(&shell->env, free_env_var);
 	}
 	exit(ec);
+}
+
+static void	display_exec_error(t_command *command, int *ec)
+{
+	const char	*command_name;
+
+	if (*ec == 0)
+		return ;
+	command_name = command->filepath;
+	if (command_name == NULL)
+		command_name = command->args[0];
+	if (command_name == NULL || get_builtin(command_name) != NULL)
+		return ;
+	if (*ec == 127
+		|| (*ec == 2 && command_name[0] != '/' && command_name[0] != '.'))
+		ft_dprintf(STDERR_FILENO, "%s: command not found\n", command_name);
+	else if (*ec == 2)
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", command_name, strerror(*ec));
+	else if (access(command_name, R_OK) < 0 || access(command_name, X_OK) < 0)
+	{
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", command_name, strerror(*ec));
+		*ec = 126;
+	}
+	else
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", command_name, strerror(*ec));
+	if (*ec == 2)
+		*ec = 127;
 }
