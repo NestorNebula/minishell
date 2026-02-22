@@ -15,10 +15,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "builtins.h"
+#include "file.h"
+#include "libft.h"
 
 int	builtin_pwd(t_command *command, t_shell *shell)
 {
 	int		rc;
+	int		fd;
 	char	*cwd;
 
 	(void) command;
@@ -26,7 +29,10 @@ int	builtin_pwd(t_command *command, t_shell *shell)
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
 		return (errno);
-	rc = printf("%s\n", cwd);
+	fd = STDOUT_FILENO;
+	if (dll_size(shell->cmds) == 1)
+		fd = ((t_file *) dll_last(command->out_files)->data)->fd;
+	rc = ft_dprintf(fd, "%s\n", cwd);
 	if (rc == -1)
 		rc = errno;
 	else
