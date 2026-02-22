@@ -20,11 +20,12 @@
  * Prepares input/output files needed by the given command.
  * Stops at the first encountered error.
  *
- * @param command A pointer to a command structure
+ * @param command_node A pointer to a dll node containing
+ * a pointer to a command structure
  * @return 0 on success, the error code of the
  * first encountered error otherwise
  */
-int		prepare_files(t_command *command);
+int		prepare_files(t_dll *command_node);
 
 /**
  * Prepares the given command for execution.
