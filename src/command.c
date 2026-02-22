@@ -27,6 +27,8 @@ t_command	*new_command(const char **raw_argv)
 	command->wstatus = -1;
 	command->in_files = NULL;
 	command->out_files = NULL;
+	command->pipe[0] = -1;
+	command->pipe[1] = -1;
 	return (command);
 }
 
