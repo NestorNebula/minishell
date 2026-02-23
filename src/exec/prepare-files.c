@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:59:42 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 11:00:50 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/23 08:46:26 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static int	prepare_outputs(t_dll *command_node, t_dll *outputs)
 			file->fd = STDOUT_FILENO;
 		else if (file->type == FILE_PIPE)
 			file->fd = ((t_command *) command_node->data)->pipe[1];
-		handle_file_status(file);
+		rc = handle_file_status(file);
 		outputs = outputs->next;
 	}
 	return (rc);
