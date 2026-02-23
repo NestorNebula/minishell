@@ -17,6 +17,9 @@ int	exec_line(t_dll *commands, t_shell *shell)
 	int	rc;
 
 	(void) shell;
+	rc = prepare_heredocs(commands);
+	if (rc != 0)
+		return (rc);
 	while (commands != NULL)
 	{
 		rc = handle_command(commands, shell);
