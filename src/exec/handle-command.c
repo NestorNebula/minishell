@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 11:37:45 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/19 15:39:36 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/23 08:58:56 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	handle_command(t_dll *command_node, t_shell *shell)
 		return (errno);
 	rc = prepare_files(command_node);
 	if (rc != 0)
-		return (rc);
+		return (1);
 	rc = handle_builtin(command_node, shell);
 	if (rc != -1)
 		return (rc);
@@ -58,7 +58,7 @@ static int	handle_builtin(t_dll *command_node, t_shell *shell)
 	if (builtin == NULL)
 		return (-1);
 	rc = builtin(command, shell);
-	command->wstatus = rc << 8;
+	command->wstatus = rc;
 	close_files(command_node);
 	return (rc);
 }
