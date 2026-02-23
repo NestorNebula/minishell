@@ -25,7 +25,7 @@ static int	prepare_outputs(t_dll *command_node, t_dll *outputs);
 
 static int	handle_file_status(t_file *file);
 
-int		prepare_files(t_dll *command_node)
+int	prepare_files(t_dll *command_node)
 {
 	int			rc;
 	t_command	*command;

@@ -10,18 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define _GNU_SOURCE 1
-
+#include "heredoc.h"
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "command.h"
 #include "get_next_line.h"
-#include "heredoc.h"
 #include "libft.h"
 
-
-static int	open_hd_file(t_pipe hd_pipe); 
+static int	open_hd_file(t_pipe hd_pipe);
 
 static int	read_heredoc(const char *delimiter, int fd);
 

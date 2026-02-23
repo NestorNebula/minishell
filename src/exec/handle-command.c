@@ -50,7 +50,7 @@ static int	handle_builtin(t_dll *command_node, t_shell *shell)
 	int				rc;
 	t_command		*command;
 	t_builtin_fn	builtin;
-	
+
 	command = command_node->data;
 	if (dll_size(shell->cmds) != 1 || command->args == NULL)
 		return (-1);

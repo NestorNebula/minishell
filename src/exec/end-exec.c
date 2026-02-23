@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 
-int		end_exec(t_dll *commands, t_shell *shell)
+int	end_exec(t_dll *commands, t_shell *shell)
 {
 	t_command	*last_command;
 

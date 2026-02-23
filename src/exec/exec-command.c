@@ -15,7 +15,7 @@
 #include "builtins.h"
 #include "exec.h"
 
-int		exec_command(t_command *command, t_shell *shell)
+int	exec_command(t_command *command, t_shell *shell)
 {
 	t_builtin_fn	builtin;
 
