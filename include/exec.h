@@ -17,6 +17,15 @@
 # include "shell.h"
 
 /**
+ * Prompts for the content of every heredoc needed by the given commands.
+ *
+ * @param commands A pointer the first node of a dll structure
+ * @return 0 on success, the error code of the 
+ * first encountered error otherwise
+ */
+int		prepare_heredocs(t_dll *commands);
+
+/**
  * Prepares input/output files needed by the given command.
  * Stops at the first encountered error.
  *
