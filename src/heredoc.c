@@ -10,12 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#define _GNU_SOURCE 1
+
+#include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "command.h"
 #include "get_next_line.h"
 #include "heredoc.h"
 #include "libft.h"
+
+
+static int	open_hd_file(t_pipe hd_pipe); 
 
 static int	read_heredoc(const char *delimiter, int fd);
 
@@ -26,8 +32,14 @@ int	get_heredoc(const char *delimiter)
 
 	if (delimiter == NULL)
 		return (-1);
-	if (pipe(hd_pipe) == -1)
-		return (-1);
+	hd_pipe[1] = -1;
+	hd_pipe[0] = -1;
+	if (open_hd_file(hd_pipe) == -1)
+	{
+		close(hd_pipe[1]);
+		if (pipe(hd_pipe) == -1)
+			return (-1);
+	}
 	rc = read_heredoc(delimiter, hd_pipe[1]);
 	close(hd_pipe[1]);
 	if (rc == -1)
@@ -36,6 +48,28 @@ int	get_heredoc(const char *delimiter)
 		return (rc);
 	}
 	return (hd_pipe[0]);
+}
+
+static int	open_hd_file(t_pipe hd_pipe)
+{
+	char	*path;
+	char	*fd_str;
+
+	hd_pipe[1] = open("/tmp", O_TMPFILE | O_WRONLY, 0644);
+	if (hd_pipe[1] == -1)
+		return (-1);
+	fd_str = ft_itoa(hd_pipe[1]);
+	if (fd_str == NULL)
+		return (-1);
+	path = ft_strjoin("/proc/self/fd/", fd_str);
+	free(fd_str);
+	if (path == NULL)
+		return (-1);
+	hd_pipe[0] = open(path, O_RDONLY);
+	free(path);
+	if (hd_pipe[0] == -1)
+		return (-1);
+	return (0);
 }
 
 static int	read_heredoc(const char *delimiter, int fd)
