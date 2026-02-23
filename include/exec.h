@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 18:09:25 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 14:36:45 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/23 08:08:22 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ int		prepare_command(t_dll *command_node);
 int		handle_command(t_dll *command_node, t_shell *shell);
 
 /**
+ * Executes every command in the given list of commands.
+ *
+ * @param commands A pointer to the first node of a dll structure
+ * @param shell A pointer to a shell structure
+ * @return 0 if the last command was executed successfully,
+ * > 0 if an error occurred for the last command
+ */
+int		exec_line(t_dll *commands, t_shell *shell);
+
+/**
  * Executes the given command.
  *
  * @param command A pointer to a command structure
@@ -55,6 +65,16 @@ int		handle_command(t_dll *command_node, t_shell *shell);
  * otherwise
  */
 int		exec_command(t_command *command, t_shell *shell);
+
+/**
+ * Waits for every executed command to end and computes
+ * the return code for the given list of commands.
+ *
+ * @param commands A pointer to the first node of a dll structure
+ * @param shell A pointer to a shell structure
+ * @return The return code for the last command of the given command list
+ */
+int		end_exec(t_dll *commands, t_shell *shell);
 
 /**
  * Closes all input/output files used by the given command.
