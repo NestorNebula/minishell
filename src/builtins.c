@@ -29,6 +29,8 @@ t_builtin_fn	get_builtin(const char *name)
 	size_t					i;
 
 	i = 0;
+	if (name == NULL)
+		return (NULL);
 	while (i < BUILTINS_COUNT
 		&& ft_strncmp(builtins[i].name, name, ft_strlen(name) + 1) != 0)
 		i++;
