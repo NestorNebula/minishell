@@ -76,7 +76,8 @@ static int	read_heredoc(const char *delimiter, int fd)
 	int		rc;
 
 	delimiter_len = ft_strlen(delimiter);
-	write(STDOUT_FILENO, "> ", 2);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	rc = 0;
 	while (line != NULL
@@ -86,7 +87,8 @@ static int	read_heredoc(const char *delimiter, int fd)
 		if (ft_dprintf(fd, "%s", line) == -1)
 			rc = -1;
 		free(line);
-		write(STDOUT_FILENO, "> ", 2);
+		if (isatty(STDIN_FILENO))
+			write(STDOUT_FILENO, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
 	}
 	free(line);
