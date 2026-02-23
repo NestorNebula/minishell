@@ -25,6 +25,33 @@ static int	prepare_outputs(t_dll *command_node, t_dll *outputs);
 
 static int	handle_file_status(t_file *file);
 
+int	prepare_heredocs(t_dll *commands)
+{
+	int			rc;
+	t_command	*command;
+	t_dll		*file_node;
+	t_file		*file;
+
+	rc = 0;
+	while (commands != NULL && commands->data != NULL && rc == 0)
+	{
+		command = commands->data;
+		file_node = command->in_files;
+		while (file_node != NULL && file_node->data != NULL && rc == 0)
+		{
+			file = file_node->data;
+			if (file->type == FILE_HEREDOC)
+			{
+				file->fd = get_heredoc(file->path);
+				rc = handle_file_status(file);
+			}
+			file_node = file_node->next;
+		}
+		commands = commands->next;
+	}
+	return (rc);
+}
+
 int	prepare_files(t_dll *command_node)
 {
 	int			rc;
@@ -52,15 +79,16 @@ static int	prepare_inputs(t_dll *command_node, t_dll *inputs)
 	while (inputs != NULL && inputs->data != NULL && rc == 0)
 	{
 		file = inputs->data;
-		if (file->type == FILE_HEREDOC)
-			file->fd = get_heredoc(file->path);
-		else if (file->type == FILE_REG)
+		if (file->type == FILE_REG)
 			file->fd = open(file->path, file->flags);
 		else if (file->type == FILE_STD)
 			file->fd = STDIN_FILENO;
 		else if (file->type == FILE_PIPE && command_node->prev != NULL)
 			file->fd = ((t_command *) command_node->prev->data)->pipe[0];
-		rc = handle_file_status(file);
+		if (file->type != FILE_HEREDOC)
+			rc = handle_file_status(file);
+		else
+			rc = file->err_code;
 		inputs = inputs->next;
 	}
 	return (rc);
@@ -97,6 +125,7 @@ static int	handle_file_status(t_file *file)
 	}
 	file->err_code = errno;
 	file->status = FILE_ERR;
-	ft_dprintf(STDERR_FILENO, "%s: %s\n", file->path, strerror(file->err_code));
+	if (file->type != FILE_HEREDOC)
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", file->path, strerror(file->err_code));
 	return (file->err_code);
 }
