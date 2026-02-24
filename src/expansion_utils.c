@@ -6,12 +6,14 @@
 /*   By: cmonmire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 08:01:29 by cmonmire          #+#    #+#             */
-/*   Updated: 2026/02/19 07:09:51 by cmonmire         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:51:23 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <stdlib.h>
 #include "env.h"
+#include "libft.h"
+#include "shell.h"
 
 char	*append_str(char *s1, char *s2)
 {
@@ -56,13 +58,14 @@ char	*get_env_value(t_shell *shell, char *key)
 	while (tmp)
 	{
 		var = (t_env_var *)tmp->data;
-		if (!ft_strncmp(var->key, key, ft_strlen(key) + 1) == 0)
+		if (ft_strncmp(var->key, key, ft_strlen(key) + 1) == 0)
 			return (var->value);
 		tmp = tmp->next;
 	}
 	return (NULL);
 }
 
+/*
 char	*remove_quotes(char *str)
 {
 	char	*result;
@@ -91,3 +94,4 @@ char	*remove_quotes(char *str)
 	result[j] = '\0';
 	return (result);
 }
+*/
