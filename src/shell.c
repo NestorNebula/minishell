@@ -10,9 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "env.h"
+#include "prompt.h"
 #include "shell.h"
 
-void	init_shell(t_shell *shell, t_dll *env)
+void	init_shell(t_shell *shell, char **envp)
 {
 	shell->env = env_from_envp(envp);
 	shell->cmds = NULL;
@@ -22,6 +25,8 @@ void	init_shell(t_shell *shell, t_dll *env)
 
 void	shell_loop(t_shell *shell)
 {
+	char	*line;
+
 	while (shell->running)
 	{
 		line = get_prompt();
@@ -30,7 +35,7 @@ void	shell_loop(t_shell *shell)
 			shell->running = 0;
 			break ;
 		}
-		parse_and_execute(shell, line);
+		// parse_and_execute(shell, line);
 		free(line);
 	}
 }
