@@ -13,6 +13,8 @@
 #ifndef SHELL_H
 # define SHELL_H
 
+#include "dll.h"
+
 typedef struct s_shell
 {
 	t_dll	*env;
@@ -20,5 +22,21 @@ typedef struct s_shell
 	int		last_status;
 	int		running;
 }	t_shell;
+
+/**
+ * Initializes the given shell structure.
+ *
+ * @param shell A pointer to a shell structure
+ * @param envp A pointer to the first element of an array of
+ * environment variables.
+ */
+void	init_shell(t_shell *shell, char **envp);
+
+/**
+ * Prompts for commands while the given shell is running.
+ *
+ * @param shell A pointer to a shell structure
+ */
+void	shell_loop(t_shell *shell);
 
 #endif
