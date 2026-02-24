@@ -17,25 +17,25 @@
 
 #include <stdio.h>
 
-int	end_exec(t_dll *commands, t_shell *shell)
+int		end_exec(t_dll *commands, t_shell *shell, int exec_rc)
 {
 	t_command	*last_command;
 
 	(void) shell;
 	if (commands == NULL)
-		return (0);
+		return (exec_rc);
 	wait_pids(commands);
 	last_command = dll_last(commands)->data;
 	if (last_command->args == NULL || last_command->args[0] == NULL)
-		return (0);
+		return (exec_rc);
 	if (get_builtin(last_command->args[0]) != NULL
 		&& commands->data == last_command)
-		return (0);
+		return (exec_rc);
 	if (WIFSIGNALED(last_command->wstatus))
 		return (WTERMSIG(last_command->wstatus));
 	if (WIFEXITED(last_command->wstatus))
 		return (WEXITSTATUS(last_command->wstatus));
 	if (last_command->wstatus == -1)
-		return (0);
+		return (exec_rc);
 	return (last_command->wstatus);
 }
