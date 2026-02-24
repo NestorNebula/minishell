@@ -126,6 +126,7 @@ static int	handle_file_status(t_file *file)
 	file->err_code = errno;
 	file->status = FILE_ERR;
 	if (file->type != FILE_HEREDOC)
-		ft_dprintf(STDERR_FILENO, "%s: %s\n", file->path, strerror(file->err_code));
+		ft_dprintf(STDERR_FILENO, "%s: %s\n",
+			file->path, strerror(file->err_code));
 	return (file->err_code);
 }
