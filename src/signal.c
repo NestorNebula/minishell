@@ -6,11 +6,13 @@
 /*   By: cmonmire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:14:09 by cmonmire          #+#    #+#             */
-/*   Updated: 2026/02/02 14:46:22 by cmonmire         ###   ########.fr       */
+/*   Updated: 2026/02/24 16:03:21 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
+#include <signal.h>
+#include <stddef.h>
+#include <readline/readline.h>
 
 volatile sig_atomic_t	g_signal;
 
