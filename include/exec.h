@@ -81,9 +81,10 @@ int		exec_command(t_command *command, t_shell *shell);
  *
  * @param commands A pointer to the first node of a dll structure
  * @param shell A pointer to a shell structure
+ * @param exec_rc The code returned by a call to the exec_line function
  * @return The return code for the last command of the given command list
  */
-int		end_exec(t_dll *commands, t_shell *shell);
+int		end_exec(t_dll *commands, t_shell *shell, int exec_rc);
 
 /**
  * Closes all input/output files used by the given command.
