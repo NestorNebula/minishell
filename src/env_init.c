@@ -12,6 +12,7 @@
 
 #include "dll.h"
 #include "env.h"
+#include "libft.h"
 
 static	t_env_var	*create_env_var(char *str)
 {
@@ -27,18 +28,6 @@ static	t_env_var	*create_env_var(char *str)
 	if (!key || !value)
 		return (NULL);
 	return (new_env_var(key, value));
-}
-
-t_env_var	*new_env_var(char *key, char *value)
-{
-	t_env_var	*var;
-
-	var = malloc(sizeof(t_env_var));
-	if (!var)
-		return (NULL);
-	var->key = key;
-	var->value = value;
-	return (var);
 }
 
 t_dll	*envp_to_env(char **envp)
