@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "dll.h"
 #include "env.h"
+#include "libft.h"
 
 static char	*build_env_line(t_env_var *var)
 {
