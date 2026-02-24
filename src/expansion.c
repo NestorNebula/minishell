@@ -6,11 +6,16 @@
 /*   By: cmonmire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/17 08:09:23 by cmonmire          #+#    #+#             */
-/*   Updated: 2026/02/19 07:09:13 by cmonmire         ###   ########.fr       */
+/*   Updated: 2026/02/24 14:51:33 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "expansion.h"
+#include "libft.h"
 #include "shell.h"
+
+static char	*expand_dollar(char *result, char *str, int *i, t_shell *shell);
 
 char	*expand_string(char *str, t_shell *shell)
 {
@@ -41,7 +46,7 @@ char	*expand_string(char *str, t_shell *shell)
 	return (result);
 }
 
-char	*expand_dollar(char *result, char *str, int *i, t_shell *shell)
+static char	*expand_dollar(char *result, char *str, int *i, t_shell *shell)
 {
 	char	*key;
 	char	*value;
@@ -63,14 +68,4 @@ char	*expand_dollar(char *result, char *str, int *i, t_shell *shell)
 		result = append_str(result, value);
 	free(key);
 	return (result);
-}
-
-char	*read_var_name(char *str, int *i)
-{
-	int	start;
-
-	start = *i;
-	while (ft_isalnum(str[*i]) || str[*i] == '_')
-		(*i)++;
-	return (ft_substr(str, start, *i - start));
 }
