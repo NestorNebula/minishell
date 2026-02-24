@@ -56,6 +56,16 @@ int		prepare_command(t_dll *command_node);
 int		handle_command(t_dll *command_node, t_shell *shell);
 
 /**
+ * Handles the execution of every command in the given list of commands,
+ * returning the appropriate value.
+ *
+ * @param commands A pointer to the first node of a dll structure
+ * @param shell A pointer to a shell structure
+ * @return 0 if the commands were executed successfully, > 0 otherwise
+ */
+int		exec(t_dll *commands, t_shell *shell);
+
+/**
  * Executes every command in the given list of commands.
  *
  * @param commands A pointer to the first node of a dll structure
