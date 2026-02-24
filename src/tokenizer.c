@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "token.h"
-#include "dll.h"
 
 static char	*read_word(char *line, int *i)
 {
@@ -27,7 +27,7 @@ static char	*read_word(char *line, int *i)
 		else if (quote && line[*i] == quote)
 			quote = 0;
 		else if (!quote && (line[*i] == ' ' || line[*i] == '\t'
-			|| line[*i] == '|' || line[*i] == '<' || line[*i] == '>'))
+				|| line[*i] == '|' || line[*i] == '<' || line[*i] == '>'))
 			break ;
 		(*i)++;
 	}
@@ -39,7 +39,7 @@ static int	is_operator(char c)
 	return (c == '|' || c == '<' || c == '>');
 }
 
-static void	*one_operator(t_dll **tokens, char *line, int *i)
+static void	one_operator(t_dll **tokens, char *line, int *i)
 {
 	t_token	*tok;
 
@@ -58,10 +58,10 @@ static void	*one_operator(t_dll **tokens, char *line, int *i)
 		tok = new_token(T_PIPE, ft_strdup("|"));
 		(*i)++;
 	}
-	tokens = add_dll(&tokens, new_dll(tok));
+	add_dll(tokens, new_dll(tok));
 }
 
-static void	*double_operator(t_dll **tokens, char *line, int *i)
+static void	double_operator(t_dll **tokens, char *line, int *i)
 {
 	t_token	*tok;
 
@@ -75,7 +75,7 @@ static void	*double_operator(t_dll **tokens, char *line, int *i)
 		tok = new_token(T_REDIR_APPEND, ft_strdup(">>"));
 		*i += 2;
 	}
-	tokens = add_dll(&tokens, new_dll(tok));
+	add_dll(tokens, new_dll(tok));
 }
 
 t_dll	*tokenizer(char *line)
@@ -93,9 +93,9 @@ t_dll	*tokenizer(char *line)
 		else if (is_operator(line[i]))
 		{
 			if (line[i] == line[i + 1])
-				double_operator(&tokens, line[i], &i);
+				double_operator(&tokens, line, &i);
 			else
-				one_operator(&tokens, line[i], &i);
+				one_operator(&tokens, line, &i);
 		}
 		else
 		{
