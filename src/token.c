@@ -10,14 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "token.h"
 
 t_token	*new_token(t_token_type type, char *value)
 {
 	t_token	*tok;
 
-	if (!content)
-		return ;
+	if (!value)
+		return (NULL);
 	tok = malloc(sizeof(t_token));
 	if (!tok)
 		return (NULL);
