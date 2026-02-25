@@ -40,14 +40,20 @@ t_dll	*envp_to_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		var = create_env_var(envp[i]);
+		var = create_env_var(envp[i++]);
 		if (!var)
+		{
+			clear_dll(&env, free_env_var);
 			return (NULL);
+		}
 		node = new_dll(var);
 		if (!node)
+		{
+			free_env_var(var);
+			clear_dll(&env, free_env_var);
 			return (NULL);
+		}
 		add_dll(&env, node);
-		i++;
 	}
 	return (env);
 }
