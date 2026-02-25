@@ -30,7 +30,7 @@ char	*expand_string(char *str, t_shell *shell)
 	{
 		if ((str[i] == '\'' || str[i] == '"') && !quote)
 		{
-			quote = str[i++];
+			quote = str[i];
 			result = append_char(result, str[i++]);
 		}
 		else if (str[i] == quote)
