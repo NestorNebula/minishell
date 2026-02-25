@@ -10,24 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "dll.h"
 #include "env.h"
 #include "libft.h"
 
 static	t_env_var	*create_env_var(char *str)
 {
-	char	*equal;
-	char	*key;
-	char	*value;
+	char		*equal;
+	t_env_var	*env_var;
 
 	equal = ft_strchr(str, '=');
 	if (!equal)
 		return (NULL);
-	key = ft_substr(str, 0, equal - str);
-	value = ft_strdup(equal + 1);
-	if (!key || !value)
-		return (NULL);
-	return (new_env_var(key, value));
+	*equal = '\0';
+	env_var = new_env_var(str, equal + 1);
+	*equal = '=';
+	return (env_var);
 }
 
 t_dll	*envp_to_env(char **envp)
