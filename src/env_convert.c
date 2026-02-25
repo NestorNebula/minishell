@@ -46,6 +46,8 @@ char	**env_to_envp(t_dll *env)
 	{
 		var = (t_env_var *)tmp->data;
 		envp[i] = build_env_line(var);
+		if (envp[i] == NULL)
+			break ;
 		tmp = tmp->next;
 		i++;
 	}
