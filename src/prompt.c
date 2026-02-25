@@ -12,12 +12,26 @@
 
 #include <readline/history.h>
 #include <readline/readline.h>
+#include <unistd.h>
+#include "get_next_line.h"
+#include "libft.h"
 
 char	*get_prompt(void)
 {
 	char	*line;
+	char	*newline;
 
-	line = readline("minishell$ ");
+	newline = NULL;
+	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+		line = readline("minishell$ ");
+	else
+	{
+		line = get_next_line(STDIN_FILENO);
+		if (line != NULL)
+			newline = ft_strchr(line, '\n');
+		if (newline != NULL)
+			*newline = '\0';
+	}
 	if (!line)
 		return (NULL);
 	if (*line)
