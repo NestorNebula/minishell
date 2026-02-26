@@ -65,7 +65,6 @@ char	*get_env_value(t_shell *shell, char *key)
 	return (NULL);
 }
 
-/*
 char	*remove_quotes(char *str)
 {
 	char	*result;
@@ -94,4 +93,3 @@ char	*remove_quotes(char *str)
 	result[j] = '\0';
 	return (result);
 }
-*/

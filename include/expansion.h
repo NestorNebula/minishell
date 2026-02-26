@@ -65,4 +65,14 @@ char	*read_var_name(char *str, int *i);
  */
 char	*get_env_value(t_shell *shell, char *key);
 
+/**
+ * Creates a copy of the given string from which
+ * the quotes have been removed.
+ *
+ * @param str A pointer to a string
+ * @return A copy of the given string without quotes on success,
+ * a null pointer on error
+ */
+char	*remove_quotes(char *str);
+
 #endif // !EXPANSION_H
