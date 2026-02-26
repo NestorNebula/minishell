@@ -14,6 +14,7 @@
 # define PARSER_H
 
 # include "dll.h"
+# include "shell.h"
 # include "stack.h"
 # include "token.h"
 
@@ -70,6 +71,16 @@ typedef struct s_parser
  * a NULL pointer on error
  */
 t_parsing_table	build_parsing_table(void);
+
+/**
+ * Parses the given line into a valid list of commands.
+ *
+ * @param line The line to parse
+ * @param shell A pointer to a shell structure
+ * @return If no error occurred and the given line was valid, a pointer to
+ * the first element of a dll structure. A null pointer otherwise
+ */
+t_dll			*parse(char *line, t_shell *shell);
 
 /**
  * Parses a list of tokens using a given parsing table.
