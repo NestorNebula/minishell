@@ -16,6 +16,7 @@
 #include "builtins.h"
 #include "env.h"
 #include "exec.h"
+#include "libft.h"
 
 int	exec_command(t_command *command, t_shell *shell)
 {
@@ -34,6 +35,6 @@ int	exec_command(t_command *command, t_shell *shell)
 		execve(command->filepath, command->args, envp);
 	else
 		execve(command->args[0], command->args, envp);
-	free(envp);
+	ft_free_arr(envp, free);
 	return (errno);
 }
