@@ -42,8 +42,10 @@ int	prepare_heredocs(t_dll *commands)
 			file = file_node->data;
 			if (file->type == FILE_HEREDOC)
 			{
-				file->fd = get_heredoc(file->path);
-				rc = handle_file_status(file);
+				file->status = FILE_OK;
+				if (get_heredoc(file->path, file) == -1)
+					file->status = FILE_ERR;
+				rc = file->err_code;
 			}
 			file_node = file_node->next;
 		}
