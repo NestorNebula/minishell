@@ -15,7 +15,7 @@
 #include "exec.h"
 #include "process.h"
 
-#include <stdio.h>
+#define SIGDEF 128
 
 int	end_exec(t_dll *commands, t_shell *shell, int exec_rc)
 {
@@ -32,7 +32,7 @@ int	end_exec(t_dll *commands, t_shell *shell, int exec_rc)
 		&& commands->data == last_command)
 		return (exec_rc);
 	if (WIFSIGNALED(last_command->wstatus))
-		return (WTERMSIG(last_command->wstatus));
+		return (SIGDEF + WTERMSIG(last_command->wstatus));
 	if (WIFEXITED(last_command->wstatus))
 		return (WEXITSTATUS(last_command->wstatus));
 	if (last_command->wstatus == -1)
