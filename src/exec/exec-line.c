@@ -1,46 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll-helpers.c                                      :+:      :+:    :+:   */
+/*   exec-line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 10:45:40 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 10:53:54 by nhoussie         ###   ########.fr       */
+/*   Created: 2026/02/23 07:52:04 by nhoussie          #+#    #+#             */
+/*   Updated: 2026/02/23 08:44:07 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
+#include "exec.h"
 
-size_t	dll_size(t_dll *dll)
+int	exec_line(t_dll *commands, t_shell *shell)
 {
-	size_t	count;
+	int	rc;
 
-	if (dll == NULL)
-		return (0);
-	count = 0;
-	while (dll != NULL)
+	(void) shell;
+	rc = prepare_heredocs(commands);
+	if (rc != 0)
+		return (rc);
+	while (commands != NULL)
 	{
-		count++;
-		dll = dll->next;
+		rc = handle_command(commands, shell);
+		commands = commands->next;
 	}
-	return (count);
-}
-
-t_dll	*dll_last(t_dll *dll)
-{
-	if (dll == NULL)
-		return (NULL);
-	while (dll->next != NULL)
-		dll = dll->next;
-	return (dll);
-}
-
-void	dll_for_each(t_dll *dll, void (*f)(void *))
-{
-	while (dll != NULL)
-	{
-		(*f)(dll);
-		dll = dll->next;
-	}
+	return (rc);
 }

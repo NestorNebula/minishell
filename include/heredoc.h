@@ -13,6 +13,8 @@
 #ifndef HEREDOC_H
 # define HEREDOC_H
 
+# define _GNU_SOURCE 1
+
 /**
  * Reads lines of input until a line corresponding
  * to the given delimiter is read.
