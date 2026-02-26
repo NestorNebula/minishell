@@ -15,16 +15,19 @@
 
 # define _GNU_SOURCE 1
 
+# include "file.h"
+
 /**
  * Reads lines of input until a line corresponding
  * to the given delimiter is read.
- * Stores the content read in the returned file descriptor.
+ * Stores the content read in the given file structure.
  *
  * @param delimiter The string to compare with each line read.
  * When encountered, the delimiter will stop the prompt.
+ * @param hd_file A pointer to a file structure
  * @return On success, a file descriptor containing the content read.
  * -1 on failure.
  */
-int	get_heredoc(const char *delimiter);
+int	get_heredoc(const char *delimiter, t_file *hd_file);
 
 #endif // !HEREDOC_H
