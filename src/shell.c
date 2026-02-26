@@ -17,7 +17,7 @@
 
 void	init_shell(t_shell *shell, char **envp)
 {
-	shell->env = env_from_envp(envp);
+	shell->env = envp_to_env(envp);
 	shell->cmds = NULL;
 	shell->last_status = 0;
 	shell->running = 1;
@@ -35,7 +35,6 @@ void	shell_loop(t_shell *shell)
 			shell->running = 0;
 			break ;
 		}
-		// parse_and_execute(shell, line);
 		free(line);
 	}
 }
