@@ -11,13 +11,16 @@
 /* ************************************************************************** */
 
 #include <errno.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include "builtins.h"
+#include "env.h"
 #include "exec.h"
 
 int	exec_command(t_command *command, t_shell *shell)
 {
 	t_builtin_fn	builtin;
+	char			**envp;
 
 	(void) shell;
 	if (command == NULL || command->args == NULL
@@ -26,9 +29,11 @@ int	exec_command(t_command *command, t_shell *shell)
 	builtin = get_builtin(command->args[0]);
 	if (builtin != NULL)
 		return (builtin(command, shell));
+	envp = env_to_envp(shell->env);
 	if (command->filepath != NULL)
-		execve(command->filepath, command->args, NULL);
+		execve(command->filepath, command->args, envp);
 	else
-		execve(command->args[0], command->args, NULL);
+		execve(command->args[0], command->args, envp);
+	free(envp);
 	return (errno);
 }
