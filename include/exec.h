@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 18:09:25 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/23 08:08:22 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/27 09:34:51 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
  * Prompts for the content of every heredoc needed by the given commands.
  *
  * @param commands A pointer the first node of a dll structure
+ * @param shell A pointer to a shell structure
  * @return 0 on success, the error code of the 
  * first encountered error otherwise
  */
-int		prepare_heredocs(t_dll *commands);
+int		prepare_heredocs(t_dll *commands, t_shell *shell);
 
 /**
  * Prepares input/output files needed by the given command.
