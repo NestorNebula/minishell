@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/27 08:44:10 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/27 09:46:50 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/27 10:05:40 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	handle_line(char *line, const char *delimiter, int fd, t_shell *shell)
 
 	delimiter_len = ft_strlen(delimiter);
 	expand = !(delimiter[0] == delimiter[delimiter_len - 1]
-		&& (delimiter[0] == '\"' || delimiter[0] == '\''));
+			&& (delimiter[0] == '\"' || delimiter[0] == '\''));
 	if (!expand)
 	{
 		rc = ft_dprintf(fd, "%s", line);

@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 08:29:57 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/27 09:50:01 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/27 10:06:34 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 #define SIGRC 128
 
-extern volatile sig_atomic_t g_signal;
+extern volatile sig_atomic_t	g_signal;
 
 static int	handle_heredoc(const char *delimiter, t_pipe hd_pipe,
 				t_shell *shell);
@@ -46,7 +46,6 @@ int	get_heredoc(const char *delimiter, t_file *hd_file, t_shell *shell)
 		return (-1);
 	}
 	set_heredoc_signals();
-	
 	hd_file->err_code = handle_heredoc(delimiter, hd_pipe, shell);
 	if (reset_stdin(stdin_dup_fd, hd_file) != -1)
 		hd_file->fd = hd_pipe[0];
