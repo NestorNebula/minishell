@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 10:59:42 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/23 08:46:26 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/27 09:35:03 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	prepare_outputs(t_dll *command_node, t_dll *outputs);
 
 static int	handle_file_status(t_file *file);
 
-int	prepare_heredocs(t_dll *commands)
+int	prepare_heredocs(t_dll *commands, t_shell *shell)
 {
 	int			rc;
 	t_command	*command;
@@ -43,7 +43,7 @@ int	prepare_heredocs(t_dll *commands)
 			if (file->type == FILE_HEREDOC)
 			{
 				file->status = FILE_OK;
-				if (get_heredoc(file->path, file) == -1)
+				if (get_heredoc(file->path, file, shell) == -1)
 					file->status = FILE_ERR;
 				rc = file->err_code;
 			}
