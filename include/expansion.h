@@ -6,14 +6,25 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/24 14:40:16 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/24 14:51:05 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/27 14:55:40 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANSION_H
 # define EXPANSION_H
 
+# include "command.h"
 # include "shell.h"
+
+/**
+ * Expands the arguments of the given command.
+ *
+ * @param command A pointer to a command structure
+ * @param shell A pointer to a shell structure
+ * @return A pointer to the first element of an array of strings containing
+ * the expanded arguments on success, a null pointer on error
+ */
+char	**expand_args(t_command *command, t_shell *shell);
 
 /**
  * Expands the given string by replacing the environment variables it stores
