@@ -33,8 +33,13 @@ int	exec_command(t_command *command, t_shell *shell)
 	envp = env_to_envp(shell->env);
 	if (command->filepath != NULL)
 		execve(command->filepath, command->args, envp);
-	else
+	else if (ft_strchr("./", command->args[0][0]) != NULL)
 		execve(command->args[0], command->args, envp);
+	else
+	{
+		ft_free_arr(envp, free);
+		return (127);
+	}
 	ft_free_arr(envp, free);
 	return (errno);
 }
