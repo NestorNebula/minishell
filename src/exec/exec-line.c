@@ -23,6 +23,7 @@ int	exec_line(t_dll *commands, t_shell *shell)
 	while (commands != NULL)
 	{
 		rc = handle_command(commands, shell);
+		close_files(commands);
 		commands = commands->next;
 	}
 	return (rc);
