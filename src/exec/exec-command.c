@@ -23,7 +23,6 @@ int	exec_command(t_command *command, t_shell *shell)
 	t_builtin_fn	builtin;
 	char			**envp;
 
-	(void) shell;
 	if (command == NULL || command->args == NULL
 		|| command->args[0] == NULL)
 		return (0);
