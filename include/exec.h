@@ -42,9 +42,10 @@ int		prepare_files(t_dll *command_node);
  *
  * @param command_node A pointer to a dll node containing
  * a pointer to a command structure
+ * @param shell A pointer to a shell structure
  * @return 0 on success, an error code otherwise
  */
-int		prepare_command(t_dll *command_node);
+int		prepare_command(t_dll *command_node, t_shell *shell);
 
 /**
  * Creates a process to execute the given command in the given shell.
