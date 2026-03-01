@@ -32,7 +32,7 @@ int	handle_child(t_dll *command_node, t_shell *shell)
 		exit_from_child(0, command_node, shell);
 	command = command_node->data;
 	close(command->pipe[0]);
-	ec = prepare_command(command_node);
+	ec = prepare_command(command_node, shell);
 	close_files(command_node);
 	if (ec != 0)
 		exit_from_child(ec, NULL, shell);

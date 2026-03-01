@@ -13,13 +13,16 @@
 #ifndef FILEPATH_H
 # define FILEPATH_H
 
+# include "shell.h"
+
 /**
  * Searches for a file named filename using the environment variables.
  *
  * @param filename The name of the file to search
+ * @param shell A pointer to a shell structure
  * @return A dynamically allocated string containing the filepath 
  * if the file was found, a NULL pointer otherwise
  */
-char	*find_filepath(const char *filename);
+char	*find_filepath(const char *filename, t_shell *shell);
 
 #endif // !FILEPATH_H
