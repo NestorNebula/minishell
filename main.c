@@ -37,6 +37,8 @@ int	main(int argc, char **argv, char **envp)
 			set_exec_signals();
 			shell.last_status = exec(shell.cmds, &shell);
 		}
+		else if (line != NULL && line[0] != '\0')
+			shell.last_status = 2;
 		if (line == NULL)
 			shell.running = 0;
 		clear_dll(&shell.cmds, free_command);
