@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmonmire <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 23:49:34 by cmonmire          #+#    #+#             */
-/*   Updated: 2026/02/09 23:50:18 by cmonmire         ###   ########.fr       */
+/*   Created: 2026/02/09 19:23:18 by nhoussie          #+#    #+#             */
+/*   Updated: 2026/03/01 14:40:03 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,13 @@ void	free_token(void *content);
  */
 t_dll	*tokenizer(char *line);
 
-#endif
+/**
+ * Reads a word from a line starting at a given index.
+ *
+ * @param line The string from which the word will be read
+ * @param i A pointer to an integer storing the start of the word's index
+ * @return A pointer to the word read on success, a null pointer on error
+ */
+char	*read_word(char *line, int *i);
+
+#endif // !TOKEN_H
