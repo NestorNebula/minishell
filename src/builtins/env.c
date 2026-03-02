@@ -26,7 +26,6 @@ int	builtin_env(t_command *command, t_shell *shell)
 	t_dll		*env_ptr;
 	t_env_var	*env_var;
 
-	(void) command;
 	rc = 0;
 	fd = STDOUT_FILENO;
 	if (dll_size(shell->cmds) == 1)
