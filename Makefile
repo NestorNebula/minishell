@@ -1,4 +1,4 @@
-NAME = minitest
+NAME = minishell 
 
 CC = cc
 
