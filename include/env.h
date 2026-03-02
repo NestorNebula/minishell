@@ -47,7 +47,7 @@ t_env_var	*find_env_var(t_dll *env_vars, const char *key);
  *
  * @param env_vars_ptr A pointer to a dll
  * @param key A string corresponding to the variable's key
- * @param value A string corresponding to the variable value
+ * @param value A string corresponding to the variable's value
  * @return A pointer to the created/updated variable on success,
  * a NULL pointer on error
  */
