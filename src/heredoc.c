@@ -11,11 +11,9 @@
 /* ************************************************************************** */
 
 #include <errno.h>
-#include <fcntl.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "command.h"
 #include "expansion.h"
 #include "get_next_line.h"
 #include "libft.h"
