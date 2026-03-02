@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "exec.h"
 #include "file.h"
 #include "libft.h"

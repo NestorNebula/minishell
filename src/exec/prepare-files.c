@@ -14,8 +14,6 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
-#include "exec.h"
-#include "file.h"
 #include "heredoc.h"
 #include "libft.h"
 

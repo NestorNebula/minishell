@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include "builtins.h"
 #include "env.h"
-#include "exec.h"
 #include "libft.h"
 
 int	exec_command(t_command *command, t_shell *shell)

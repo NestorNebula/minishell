@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "dll.h"
 #include "env.h"
 
 static void	unset_env_var(t_shell *shell, const char *key);

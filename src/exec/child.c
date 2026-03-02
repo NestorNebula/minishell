@@ -17,7 +17,6 @@
 #include "exec.h"
 #include "env.h"
 #include "libft.h"
-#include "process.h"
 
 static void	exit_from_child(int ec, t_dll *command_node, t_shell *shell);
 
