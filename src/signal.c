@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <signal.h>
+#include <stddef.h>
 #include "shell_signal.h"
 
 static void	set_signals(void (*handler)(int));
