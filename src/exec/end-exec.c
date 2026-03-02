@@ -12,7 +12,6 @@
 
 #include <sys/wait.h>
 #include "builtins.h"
-#include "exec.h"
 #include "process.h"
 
 #define SIGDEF 128
