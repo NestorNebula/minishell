@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include "expansion.h"
 #include "libft.h"
-#include "shell.h"
 
 static char	*expand_dollar(char *result, char *str, int *i, t_shell *shell);
 
