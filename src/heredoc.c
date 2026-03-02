@@ -50,7 +50,7 @@ int	get_heredoc(const char *delimiter, t_file *hd_file, t_shell *shell)
 	if (reset_stdin(stdin_dup_fd, hd_file) != -1)
 		hd_file->fd = hd_pipe[0];
 	else
-		close(hd_pipe[0]);
+		ft_close(hd_pipe[0]);
 	set_default_signals();
 	return (hd_file->fd);
 }
@@ -76,9 +76,9 @@ static int	handle_heredoc(const char *delimiter, t_pipe hd_pipe,
 	if (rc == -1)
 		rc = errno;
 	free(unquoted_delimiter);
-	close(hd_pipe[1]);
+	ft_close(hd_pipe[1]);
 	if (rc != 0)
-		close(hd_pipe[0]);
+		ft_close(hd_pipe[0]);
 	return (rc);
 }
 
@@ -126,6 +126,6 @@ static int	reset_stdin(int stdin_dup_fd, t_file *hd_file)
 		hd_file->err_code = SIGRC + SIGINT;
 		rc = -1;
 	}
-	close(stdin_dup_fd);
+	ft_close(stdin_dup_fd);
 	return (rc);
 }

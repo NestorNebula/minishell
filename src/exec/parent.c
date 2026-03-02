@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "libft.h"
 #include "process.h"
 
 int	handle_parent(t_command *command, int pid)
 {
 	if (command != NULL)
 	{
-		close(command->pipe[1]);
+		ft_close(command->pipe[1]);
 		command->pid = pid;
 	}
 	return (0);

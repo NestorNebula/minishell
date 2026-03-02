@@ -92,7 +92,7 @@ static int	prepare_inputs(t_dll *command_node, t_dll *inputs)
 		else
 			rc = file->err_code;
 		if (inputs->next != NULL && file->err_code == 0)
-			close(file->fd);
+			ft_close(file->fd);
 		inputs = inputs->next;
 	}
 	return (rc);
@@ -115,7 +115,7 @@ static int	prepare_outputs(t_dll *command_node, t_dll *outputs)
 			file->fd = ((t_command *) command_node->data)->pipe[1];
 		rc = handle_file_status(file);
 		if (outputs->next != NULL && file->err_code == 0)
-			close(file->fd);
+			ft_close(file->fd);
 		outputs = outputs->next;
 	}
 	return (rc);
