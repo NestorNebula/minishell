@@ -14,7 +14,7 @@ INCLUDE_DIR = $(ROOT_DIR)/include
 
 SRC_DIR = $(ROOT_DIR)/src
 
-SRC = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c) main.c
+SRC = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c)
 # SRC = $(SRC_DIR)/dll.c $(SRC_DIR)/dll-helpers.c $(SRC_DIR)/command.c \
 	  $(SRC_DIR)/file.c $(SRC_DIR)/filepath.c $(SRC_DIR)/env.c \
 	  $(SRC_DIR)/heredoc.c $(SRC_DIR)/exec/child.c \
