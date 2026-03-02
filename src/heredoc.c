@@ -104,6 +104,8 @@ static int	read_heredoc(const char *delimiter, const char *unquoted_delimiter,
 			write(STDOUT_FILENO, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
 	}
+	if (line == NULL && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+		write(STDOUT_FILENO, "\n", 1);
 	free(line);
 	get_next_line(-1);
 	return (rc);
