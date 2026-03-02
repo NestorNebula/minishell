@@ -13,7 +13,7 @@
 #ifndef SHELL_H
 # define SHELL_H
 
-#include "dll.h"
+# include "dll.h"
 
 typedef struct s_shell
 {
@@ -28,7 +28,7 @@ typedef struct s_shell
  *
  * @param shell A pointer to a shell structure
  * @param envp A pointer to the first element of an array of
- * environment variables.
+ * environment variables
  */
 void	init_shell(t_shell *shell, char **envp);
 
@@ -39,4 +39,4 @@ void	init_shell(t_shell *shell, char **envp);
  */
 void	shell_loop(t_shell *shell);
 
-#endif
+#endif // !SHELL_H

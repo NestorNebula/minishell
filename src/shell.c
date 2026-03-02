@@ -16,7 +16,6 @@
 #include "exec.h"
 #include "parser.h"
 #include "prompt.h"
-#include "shell.h"
 #include "shell_signal.h"
 
 #define SIGRC 128
