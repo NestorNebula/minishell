@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "parser.h"
 #include "parser_helpers.h"
 
 t_parsing_table	build_parsing_table(void)

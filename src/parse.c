@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "build_commands.h"
-#include "command.h"
 #include "expansion.h"
 #include "libft.h"
 #include "parser.h"

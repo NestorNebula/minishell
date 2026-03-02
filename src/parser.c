@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "parser.h"
-
-#include <stdio.h>
 
 static t_token_type	get_next_token(t_stack *stack, t_dll *tokens,
 						int skip, t_token **token_ptr);
