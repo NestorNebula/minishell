@@ -38,5 +38,9 @@ static void	unset_env_var(t_shell *shell, const char *key)
 	while (env_vars != NULL && env_vars->data != env_var)
 		env_vars = env_vars->next;
 	if (env_vars != NULL)
+	{
+		if (env_vars == shell->env)
+			shell->env = shell->env->next;
 		free_dll(env_vars, free_env_var);
+	}
 }
