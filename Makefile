@@ -1,4 +1,4 @@
-NAME = minitest
+NAME = minishell 
 
 CC = cc
 
@@ -14,7 +14,6 @@ INCLUDE_DIR = $(ROOT_DIR)/include
 
 SRC_DIR = $(ROOT_DIR)/src
 
-SRC = $(wildcard $(SRC_DIR)/*.c) $(wildcard $(SRC_DIR)/*/*.c)
 SRC = $(SRC_DIR)/build_commands.c $(SRC_DIR)/builtins.c $(SRC_DIR)/command.c \
 	  $(SRC_DIR)/dll.c $(SRC_DIR)/dll-helpers.c $(SRC_DIR)/env.c \
 	  $(SRC_DIR)/env_convert.c $(SRC_DIR)/env_free.c $(SRC_DIR)/env_init.c \
