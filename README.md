@@ -88,7 +88,7 @@ To exit the shell, you can use ctrl-D or the `exit` built-in command.
 
 ## Resources
 
-For the parsing part of the project, [this article]() was used as a starting point for the parser's implementation.
+For the parsing part of the project, [this article](https://github.com/kibatche/parser-bison) was used as a starting point for the parser's implementation.
 
 For the execution part, the [Advanced Programming in the UNIX® Environment book](http://www.apuebook.com/) was very useful to discover and understand the new concepts introduced by the project.
 
