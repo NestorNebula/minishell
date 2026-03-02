@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "dll.h"
 #include "env.h"
 #include "libft.h"
@@ -38,7 +37,7 @@ t_dll	*envp_to_env(char **envp)
 
 	env = NULL;
 	i = 0;
-	while (envp[i])
+	while (envp != NULL && envp[i])
 	{
 		var = create_env_var(envp[i++]);
 		if (!var)
