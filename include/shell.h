@@ -28,7 +28,7 @@ typedef struct s_shell
  *
  * @param shell A pointer to a shell structure
  * @param envp A pointer to the first element of an array of
- * environment variables.
+ * environment variables
  */
 void	init_shell(t_shell *shell, char **envp);
 
