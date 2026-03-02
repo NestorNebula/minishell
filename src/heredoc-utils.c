@@ -28,17 +28,17 @@ int	open_heredoc(t_pipe hd_pipe)
 	if (hd_pipe[1] == -1)
 		return (-1);
 	fd_str = ft_itoa(hd_pipe[1]);
-	if (fd_str == NULL && close(hd_pipe[1]) >= -1)
+	if (fd_str == NULL && ft_close(hd_pipe[1]) >= -1)
 		return (-1);
 	path = ft_strjoin("/proc/self/fd/", fd_str);
 	free(fd_str);
-	if (path == NULL && close(hd_pipe[1]) >= -1)
+	if (path == NULL && ft_close(hd_pipe[1]) >= -1)
 		return (-1);
 	hd_pipe[0] = open(path, O_RDONLY);
 	free(path);
 	if (hd_pipe[0] == -1)
 	{
-		close(hd_pipe[1]);
+		ft_close(hd_pipe[1]);
 		if (pipe(hd_pipe) == -1)
 			return (-1);
 	}

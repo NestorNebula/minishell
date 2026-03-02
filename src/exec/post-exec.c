@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include "exec.h"
 #include "file.h"
+#include "libft.h"
 
 static void	close_inputs(t_dll *command_node);
 
@@ -38,12 +39,12 @@ static void	close_inputs(t_dll *command_node)
 		file = dll_last(command->in_files)->data;
 		if (file->status == FILE_OK
 			&& (file->type == FILE_REG || file->type == FILE_HEREDOC))
-			close(file->fd);
+			ft_close(file->fd);
 	}
 	if (command_node->prev != NULL)
 	{
 		prev = command_node->prev->data;
-		close(prev->pipe[0]);
+		ft_close(prev->pipe[0]);
 	}
 }
 
@@ -53,13 +54,13 @@ static void	close_outputs(t_dll	*command_node)
 	t_file		*file;
 
 	command = command_node->data;
-	close(command->pipe[1]);
+	ft_close(command->pipe[1]);
 	if (command->out_files != NULL)
 	{
 		file = dll_last(command->out_files)->data;
 		if (file->status == FILE_OK && file->type == FILE_REG)
-			close(file->fd);
+			ft_close(file->fd);
 	}
 	if (command_node->next == NULL)
-		close(command->pipe[0]);
+		ft_close(command->pipe[0]);
 }
