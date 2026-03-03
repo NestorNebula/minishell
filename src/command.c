@@ -17,7 +17,7 @@
 
 static t_command	*set_command_default_files(t_command *command);
 
-t_command	*new_command()
+t_command	*new_command(void)
 {
 	t_command	*command;
 

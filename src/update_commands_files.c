@@ -21,7 +21,7 @@ static int	update_command_files(t_command *command, t_dll *command_node,
 
 static int	update_files_path(t_dll *files, t_shell *shell);
 
-int		update_commands_files(t_dll *commands, t_shell *shell)
+int	update_commands_files(t_dll *commands, t_shell *shell)
 {
 	t_command	*command;
 
