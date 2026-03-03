@@ -17,18 +17,19 @@
 
 static t_command	*set_command_default_files(t_command *command);
 
-t_command	*new_command(const char **raw_argv)
+t_command	*new_command()
 {
 	t_command	*command;
 
 	command = malloc(sizeof(t_command));
 	if (command == NULL)
 		return (NULL);
-	command->raw_argv = raw_argv;
 	command->args = NULL;
 	command->filepath = NULL;
 	command->pid = -1;
 	command->wstatus = -1;
+	command->pipe[0] = -1;
+	command->pipe[1] = -1;
 	if (set_command_default_files(command) == NULL)
 	{
 		free_command(command);
