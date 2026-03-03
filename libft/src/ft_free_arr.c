@@ -22,7 +22,7 @@ void	ft_free_arr(void *arr, void (*free_item)(void *))
 		if (free_item != NULL)
 		{
 			tmp = (void **) arr;
-			while (tmp != NULL)
+			while (*tmp != NULL)
 				(*free_item)(*tmp++);
 		}
 		free(arr);

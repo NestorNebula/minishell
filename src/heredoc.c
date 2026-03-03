@@ -6,57 +6,124 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 08:29:57 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/05 08:50:54 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/27 10:06:34 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <signal.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "command.h"
+#include "expansion.h"
 #include "get_next_line.h"
-#include "heredoc.h"
 #include "libft.h"
+#include "shell_signal.h"
+#include "heredoc.h"
 
-static int	read_heredoc(const char *delimiter, int fd);
+#define SIGRC 128
 
-int	get_heredoc(const char *delimiter)
+extern volatile sig_atomic_t	g_signal;
+
+static int	handle_heredoc(const char *delimiter, t_pipe hd_pipe,
+				t_shell *shell);
+
+static int	read_heredoc(const char *delimiter, const char *unquoted_delimiter,
+				int fd, t_shell *shell);
+
+static int	reset_stdin(int stdin_dup_fd, t_file *hd_file);
+
+int	get_heredoc(const char *delimiter, t_file *hd_file, t_shell *shell)
 {
 	t_pipe	hd_pipe;
-	int		rc;
+	int		stdin_dup_fd;
 
-	if (delimiter == NULL)
-		return (-1);
-	if (pipe(hd_pipe) == -1)
-		return (-1);
-	rc = read_heredoc(delimiter, hd_pipe[1]);
-	close(hd_pipe[1]);
-	if (rc == -1)
+	stdin_dup_fd = dup(STDIN_FILENO);
+	if (stdin_dup_fd == -1)
 	{
-		close(hd_pipe[0]);
-		return (rc);
+		hd_file->err_code = errno;
+		return (-1);
 	}
-	return (hd_pipe[0]);
+	set_heredoc_signals();
+	hd_file->err_code = handle_heredoc(delimiter, hd_pipe, shell);
+	if (reset_stdin(stdin_dup_fd, hd_file) != -1)
+		hd_file->fd = hd_pipe[0];
+	else
+		ft_close(hd_pipe[0]);
+	set_default_signals();
+	return (hd_file->fd);
 }
 
-static int	read_heredoc(const char *delimiter, int fd)
+static int	handle_heredoc(const char *delimiter, t_pipe hd_pipe,
+				t_shell *shell)
+{
+	int		rc;
+	char	*unquoted_delimiter;
+
+	hd_pipe[1] = -1;
+	hd_pipe[0] = -1;
+	unquoted_delimiter = remove_quotes((char *) delimiter);
+	if (unquoted_delimiter == NULL)
+		return (errno);
+	if (open_heredoc(hd_pipe) == -1)
+	{
+		rc = errno;
+		free(unquoted_delimiter);
+		return (rc);
+	}
+	rc = read_heredoc(delimiter, unquoted_delimiter, hd_pipe[1], shell);
+	if (rc == -1)
+		rc = errno;
+	free(unquoted_delimiter);
+	ft_close(hd_pipe[1]);
+	if (rc != 0)
+		ft_close(hd_pipe[0]);
+	return (rc);
+}
+
+static int	read_heredoc(const char *delimiter, const char *unquoted_delimiter,
+				int fd, t_shell *shell)
 {
 	char	*line;
 	size_t	delimiter_len;
 	int		rc;
 
-	delimiter_len = ft_strlen(delimiter);
-	write(STDOUT_FILENO, "> ", 2);
+	delimiter_len = ft_strlen(unquoted_delimiter);
+	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+		write(STDOUT_FILENO, "> ", 2);
 	line = get_next_line(STDIN_FILENO);
 	rc = 0;
-	while (line != NULL && ft_strncmp(line, delimiter, delimiter_len + 1) != 0)
+	while (line != NULL
+		&& (ft_strncmp(line, unquoted_delimiter, delimiter_len) != 0
+			|| line[delimiter_len] != '\n'))
 	{
-		if (ft_dprintf(fd, "%s", line) == -1)
-			rc = -1;
+		rc = handle_line(line, delimiter, fd, shell);
 		free(line);
-		write(STDOUT_FILENO, "> ", 2);
+		if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+			write(STDOUT_FILENO, "> ", 2);
 		line = get_next_line(STDIN_FILENO);
 	}
+	if (line == NULL && isatty(STDIN_FILENO) && isatty(STDOUT_FILENO))
+		write(STDOUT_FILENO, "\n", 1);
 	free(line);
 	get_next_line(-1);
+	return (rc);
+}
+
+static int	reset_stdin(int stdin_dup_fd, t_file *hd_file)
+{
+	int	rc;
+
+	rc = 0;
+	if (dup2(stdin_dup_fd, STDIN_FILENO) == -1)
+	{
+		hd_file->err_code = errno;
+		rc = -1;
+	}
+	else if (g_signal == SIGINT)
+	{
+		hd_file->err_code = SIGRC + SIGINT;
+		rc = -1;
+	}
+	ft_close(stdin_dup_fd);
 	return (rc);
 }

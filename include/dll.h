@@ -6,7 +6,7 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 14:26:04 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/02 18:39:36 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/02/06 10:46:49 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ void		add_dll(t_dll **dll_ptr, t_dll *new_dll);
  * @return The size (number of nodes) of the given dll
  */
 size_t		dll_size(t_dll *dll);
+
+/**
+ * Finds the last node in a dll.
+ *
+ * @param dll A pointer to the first node of a dll
+ * @return The last node of the given dll. NULL if there is no node in the dll
+ */
+t_dll		*dll_last(t_dll *dll);
 
 /**
  * Frees a dll node.
