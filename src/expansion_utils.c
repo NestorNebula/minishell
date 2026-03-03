@@ -43,6 +43,8 @@ char	*read_var_name(char *str, int *i)
 {
 	int	start;
 
+	if (str == NULL)
+		return (NULL);
 	start = *i;
 	while (str[*i] && (ft_isalnum(str[*i]) || str[*i] == '_'))
 		(*i)++;
@@ -54,6 +56,8 @@ char	*get_env_value(t_shell *shell, char *key)
 	t_dll		*tmp;
 	t_env_var	*var;
 
+	if (key == NULL)
+		return (NULL);
 	tmp = shell->env;
 	while (tmp)
 	{
