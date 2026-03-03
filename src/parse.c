@@ -34,7 +34,7 @@ t_dll	*parse(char *line, t_shell *shell)
 		return (NULL);
 	if (!check_tokens(tokens))
 		return (NULL);
-	commands = build_commands(tokens);
+	commands = build_commands(tokens, shell);
 	clear_dll(&tokens, free_token);
 	if (commands == NULL)
 		return (NULL);

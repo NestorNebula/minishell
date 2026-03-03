@@ -14,6 +14,7 @@
 # define BUILD_COMMANDS_H
 
 # include "dll.h"
+# include "shell.h"
 
 /**
  * Creates a list of commands from a list of tokens.
@@ -21,10 +22,11 @@
  * its behavior is undefined.
  *
  * @param tokens A pointer to the first element of a dll of tokens
+ * @param shell A pointer to a shell structure
  * @return A pointer to the first element of a dll of commands on success,
  * a NULL pointer on error
  */
-t_dll	*build_commands(t_dll *tokens);
+t_dll	*build_commands(t_dll *tokens, t_shell *shell);
 
 /**
  * Updates i/o files for each command in a command list.
@@ -32,7 +34,9 @@ t_dll	*build_commands(t_dll *tokens);
  * Replaces standard i/o by pipes if other commands are in the list.
  *
  * @param commands A pointer to the first element of a dll of commands
+ * @param shell A pointer to a shell structure
+ * @return 0 on success, -1 on error
  */
-void	update_commands_files(t_dll *commands);
+int		update_commands_files(t_dll *commands, t_shell *shell);
 
 #endif // !BUILD_COMMANDS_H

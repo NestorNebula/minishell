@@ -26,7 +26,7 @@ static t_file		*set_command_file(t_command *command, t_dll **tokens_ptr);
 
 static t_file		*get_command_file(t_dll **tokens_ptr);
 
-t_dll	*build_commands(t_dll *tokens)
+t_dll	*build_commands(t_dll *tokens, t_shell *shell)
 {
 	t_dll		*commands;
 	t_dll		*command_node;
@@ -50,7 +50,8 @@ t_dll	*build_commands(t_dll *tokens)
 		}
 		add_dll(&commands, command_node);
 	}
-	update_commands_files(commands);
+	if (update_commands_files(commands, shell) == -1)
+		clear_dll(&commands, free_command);
 	return (commands);
 }
 
