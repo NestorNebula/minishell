@@ -87,9 +87,11 @@ t_dll			*parse(char *line, t_shell *shell);
  *
  * @param tokens A pointer to the first element of a dll
  * @param parsing_table A pointer to the first step of a parsing table
+ * @param stack A pointer to a stack structure
  * @return If the given list of tokens is valid, a NULL pointer is returned,
  * else, a pointer to the token that caused the list to be invalid is returned
  */
-t_token			*parse_tokens(t_dll *tokens, t_parsing_table parsing_table);
+t_token			*parse_tokens(t_dll *tokens, t_parsing_table parsing_table,
+					t_stack *stack);
 
 #endif // !PARSER_H

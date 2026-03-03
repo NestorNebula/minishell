@@ -50,6 +50,7 @@ static bool	check_tokens(t_dll *tokens)
 {
 	t_parsing_table	parsing_table;
 	t_token			*token;
+	t_stack			*stack;
 
 	parsing_table = build_parsing_table();
 	if (parsing_table == NULL)
@@ -57,7 +58,13 @@ static bool	check_tokens(t_dll *tokens)
 		clear_dll(&tokens, free_token);
 		return (false);
 	}
-	token = parse_tokens(tokens, parsing_table);
+	stack = new_stack(dll_size(tokens));
+	if (stack == NULL)
+	{
+		clear_dll(&tokens, free_token);
+		return (false);
+	}
+	token = parse_tokens(tokens, parsing_table, stack);
 	free(parsing_table);
 	if (token != NULL)
 	{
