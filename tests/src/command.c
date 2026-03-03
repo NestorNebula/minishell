@@ -16,11 +16,9 @@ static void	new_command_test(void)
 	t_command	*command;
 
 	unit_test = new_unit_test("new_command", false);
-	command = new_command(NULL);
+	command = new_command();
 	cut_assert(command != NULL, unit_test,
 		"returns a pointer to a non-null command structure");
-	cut_expect(command->raw_argv == NULL, unit_test,
-		"sets command's raw_argv to given argument");
 	cut_expect(command->args == NULL, unit_test,
 		"sets command's args to NULL");
 	cut_expect(command->filepath == NULL, unit_test,
