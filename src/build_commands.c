@@ -67,6 +67,8 @@ static t_command	*build_command(t_dll **tokens_ptr)
 		return (NULL);
 	if (((t_token *)(*tokens_ptr)->data)->type == T_PIPE)
 		*tokens_ptr = (*tokens_ptr)->next;
+	if (tokens_ptr == NULL || (*tokens_ptr) == NULL || (*tokens_ptr)->data == NULL)
+		return (NULL);
 	token = (*tokens_ptr)->data;
 	while (token != NULL && token->type != T_END && token->type != T_PIPE)
 	{

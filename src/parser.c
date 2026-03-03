@@ -22,16 +22,15 @@ static t_token		*check_tokens(t_parser *parser, t_dll *tokens);
 static void			do_step(t_parser *parser, t_dll **tokens,
 						int *skipped_tokens);
 
-t_token	*parse_tokens(t_dll *tokens, t_parsing_table parsing_table)
+t_token	*parse_tokens(t_dll *tokens, t_parsing_table parsing_table,
+			t_stack *stack)
 {
 	t_parser		parser;
 	t_token			*err_token;
 
-	if (tokens == NULL || parsing_table == NULL)
+	if (tokens == NULL || parsing_table == NULL || stack == NULL)
 		return (NULL);
-	parser.stack = new_stack(dll_size(tokens));
-	if (parser.stack == NULL)
-		return (NULL);
+	parser.stack = stack; 
 	parser.parsing_table = parsing_table;
 	parser.state = 0;
 	parser.step = NULL;
