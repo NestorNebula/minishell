@@ -23,4 +23,20 @@ typedef struct s_shell
 	int		running;
 }	t_shell;
 
-#endif
+/**
+ * Initializes the given shell structure.
+ *
+ * @param shell A pointer to a shell structure
+ * @param envp A pointer to the first element of an array of
+ * environment variables
+ */
+void	init_shell(t_shell *shell, char **envp);
+
+/**
+ * Prompts for commands while the given shell is running.
+ *
+ * @param shell A pointer to a shell structure
+ */
+void	shell_loop(t_shell *shell);
+
+#endif // !SHELL_H
