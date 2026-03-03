@@ -53,7 +53,8 @@ char	*string_cat(t_string *str_ptr, const char *str, size_t str_len)
 		str_ptr->content = resized_str;
 		str_ptr->size *= 2;
 	}
-	ft_strlcpy(str_ptr->content + str_ptr->len, str, str_len + 1);
+	ft_memcpy(str_ptr->content + str_ptr->len, str, str_len);
+	str_ptr->content[str_ptr->len + str_len] = '\0';
 	str_ptr->len += str_len;
 	return (str_ptr->content);
 }

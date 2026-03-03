@@ -76,5 +76,6 @@ int		ft_dprintf(int fd, const char *format, ...);
 
 void	ft_free_arr(void *arr, void (*free_item)(void *));
 int		ft_close(int fd);
+char	**ft_split_set(char const *s, const char *set);
 
 #endif /* end of include guard: LIBFT_H */
