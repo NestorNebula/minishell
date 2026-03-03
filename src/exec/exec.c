@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 11:43:17 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/01/30 11:47:56 by nhoussie         ###   ########.fr       */
+/*   Created: 2026/02/24 10:11:20 by nhoussie          #+#    #+#             */
+/*   Updated: 2026/02/24 10:15:54 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include "exec.h"
 
-void	ft_free_arr(void *arr, void (*free_item)(void *))
+int	exec(t_dll *commands, t_shell *shell)
 {
-	void	**tmp;
+	int	rc;
 
-	if (arr != NULL)
-	{
-		if (free_item != NULL)
-		{
-			tmp = (void **) arr;
-			while (*tmp != NULL)
-				(*free_item)(*tmp++);
-		}
-		free(arr);
-	}
+	rc = exec_line(commands, shell);
+	rc = end_exec(commands, shell, rc);
+	return (rc);
 }

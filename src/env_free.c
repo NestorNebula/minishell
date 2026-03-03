@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   env_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cmonmire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 11:43:17 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/01/30 11:47:56 by nhoussie         ###   ########.fr       */
+/*   Created: 2026/02/24 01:00:42 by cmonmire          #+#    #+#             */
+/*   Updated: 2026/02/24 01:02:34 by cmonmire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft.h"
 
-void	ft_free_arr(void *arr, void (*free_item)(void *))
+void	free_envp(char **envp)
 {
-	void	**tmp;
+	int	i;
 
-	if (arr != NULL)
-	{
-		if (free_item != NULL)
-		{
-			tmp = (void **) arr;
-			while (*tmp != NULL)
-				(*free_item)(*tmp++);
-		}
-		free(arr);
-	}
+	i = 0;
+	while (envp[i])
+		free(envp[i++]);
+	free(envp);
 }

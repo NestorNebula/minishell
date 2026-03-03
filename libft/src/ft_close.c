@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_close.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/30 11:43:17 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/01/30 11:47:56 by nhoussie         ###   ########.fr       */
+/*   Created: 2026/02/15 14:56:52 by nhoussie          #+#    #+#             */
+/*   Updated: 2026/02/15 14:58:44 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <unistd.h>
 #include "libft.h"
 
-void	ft_free_arr(void *arr, void (*free_item)(void *))
+int	ft_close(int fd)
 {
-	void	**tmp;
-
-	if (arr != NULL)
-	{
-		if (free_item != NULL)
-		{
-			tmp = (void **) arr;
-			while (*tmp != NULL)
-				(*free_item)(*tmp++);
-		}
-		free(arr);
-	}
+	if (fd >= 0)
+		return (close(fd));
+	return (0);
 }

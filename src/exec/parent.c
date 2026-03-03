@@ -1,46 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dll-helpers.c                                      :+:      :+:    :+:   */
+/*   parent.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 10:45:40 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/06 10:53:54 by nhoussie         ###   ########.fr       */
+/*   Created: 2026/02/06 14:45:09 by nhoussie          #+#    #+#             */
+/*   Updated: 2026/02/19 15:21:05 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "dll.h"
+#include "libft.h"
+#include "process.h"
 
-size_t	dll_size(t_dll *dll)
+int	handle_parent(t_command *command, int pid)
 {
-	size_t	count;
-
-	if (dll == NULL)
-		return (0);
-	count = 0;
-	while (dll != NULL)
+	if (command != NULL)
 	{
-		count++;
-		dll = dll->next;
+		ft_close(command->pipe[1]);
+		command->pid = pid;
 	}
-	return (count);
-}
-
-t_dll	*dll_last(t_dll *dll)
-{
-	if (dll == NULL)
-		return (NULL);
-	while (dll->next != NULL)
-		dll = dll->next;
-	return (dll);
-}
-
-void	dll_for_each(t_dll *dll, void (*f)(void *))
-{
-	while (dll != NULL)
-	{
-		(*f)(dll);
-		dll = dll->next;
-	}
+	return (0);
 }
