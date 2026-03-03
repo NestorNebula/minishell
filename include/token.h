@@ -6,12 +6,14 @@
 /*   By: nhoussie <nhoussie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 19:23:18 by nhoussie          #+#    #+#             */
-/*   Updated: 2026/02/11 14:38:23 by nhoussie         ###   ########.fr       */
+/*   Updated: 2026/03/01 14:40:03 by nhoussie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
+
+# include "dll.h"
 
 typedef enum e_token_type
 {
@@ -30,5 +32,39 @@ typedef struct s_token
 	t_token_type	type;
 	char			*value;
 }	t_token;
+
+/**
+ * Initializes a new token structure.
+ *
+ * @param type The token's type
+ * @param value The token's value
+ * @return A pointer to a token structure on success, a null pointer on error
+ */
+t_token	*new_token(t_token_type type, char *value);
+
+/**
+ * Frees a token structure.
+ *
+ * @param content A pointer to a token structure
+ */
+void	free_token(void *content);
+
+/**
+ * Creates a list of tokens from the given line.
+ *
+ * @param line The string to use to create the list of tokens
+ * @return A pointer to the first node of a dll structure of tokens on success,
+ * a null pointer on error
+ */
+t_dll	*tokenizer(char *line);
+
+/**
+ * Reads a word from a line starting at a given index.
+ *
+ * @param line The string from which the word will be read
+ * @param i A pointer to an integer storing the start of the word's index
+ * @return A pointer to the word read on success, a null pointer on error
+ */
+char	*read_word(char *line, int *i);
 
 #endif // !TOKEN_H
