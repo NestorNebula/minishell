@@ -30,7 +30,6 @@ int	builtin_echo(t_command *command, t_shell *shell)
 	size_t	options_count;
 	int		fd;
 
-	(void) shell;
 	options_count = 0;
 	while (has_option(command->args[options_count + 1]))
 		options_count++;
