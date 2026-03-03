@@ -62,7 +62,7 @@ static t_command	*build_command(t_dll **tokens_ptr)
 
 	if (tokens_ptr == NULL || *tokens_ptr == NULL)
 		return (NULL);
-	command = new_command(NULL);
+	command = new_command();
 	if (command == NULL)
 		return (NULL);
 	if (((t_token *)(*tokens_ptr)->data)->type == T_PIPE)

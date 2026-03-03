@@ -18,7 +18,6 @@
 typedef int	t_pipe[2];
 
 typedef struct s_command {
-	const char			**raw_argv;
 	char				**args;
 	char				*filepath;
 	int					pid;
@@ -31,10 +30,9 @@ typedef struct s_command {
 /**
  * Initializes a new command structure.
  *
- * @param raw_argv The initial args that will be used to create the command
  * @return A pointer to a command structure on success, NULL on error
  */
-t_command	*new_command(const char **raw_argv);
+t_command	*new_command(void);
 
 /**
  * Frees a command structure.
