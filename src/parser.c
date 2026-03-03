@@ -30,7 +30,7 @@ t_token	*parse_tokens(t_dll *tokens, t_parsing_table parsing_table,
 
 	if (tokens == NULL || parsing_table == NULL || stack == NULL)
 		return (NULL);
-	parser.stack = stack; 
+	parser.stack = stack;
 	parser.parsing_table = parsing_table;
 	parser.state = 0;
 	parser.step = NULL;

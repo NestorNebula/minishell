@@ -34,7 +34,7 @@ t_dll	*parse(char *line, t_shell *shell)
 		return (NULL);
 	if (!check_tokens(tokens))
 		return (NULL);
-	commands = build_commands(tokens);
+	commands = build_commands(tokens, shell);
 	clear_dll(&tokens, free_token);
 	if (commands == NULL)
 		return (NULL);
@@ -53,14 +53,11 @@ static bool	check_tokens(t_dll *tokens)
 	t_stack			*stack;
 
 	parsing_table = build_parsing_table();
-	if (parsing_table == NULL)
-	{
-		clear_dll(&tokens, free_token);
-		return (false);
-	}
 	stack = new_stack(dll_size(tokens));
-	if (stack == NULL)
+	if (parsing_table == NULL || stack == NULL)
 	{
+		free(parsing_table);
+		free(stack);
 		clear_dll(&tokens, free_token);
 		return (false);
 	}

@@ -26,7 +26,7 @@ static t_file		*set_command_file(t_command *command, t_dll **tokens_ptr);
 
 static t_file		*get_command_file(t_dll **tokens_ptr);
 
-t_dll	*build_commands(t_dll *tokens)
+t_dll	*build_commands(t_dll *tokens, t_shell *shell)
 {
 	t_dll		*commands;
 	t_dll		*command_node;
@@ -50,7 +50,8 @@ t_dll	*build_commands(t_dll *tokens)
 		}
 		add_dll(&commands, command_node);
 	}
-	update_commands_files(commands);
+	if (update_commands_files(commands, shell) == -1)
+		clear_dll(&commands, free_command);
 	return (commands);
 }
 
@@ -67,8 +68,6 @@ static t_command	*build_command(t_dll **tokens_ptr)
 		return (NULL);
 	if (((t_token *)(*tokens_ptr)->data)->type == T_PIPE)
 		*tokens_ptr = (*tokens_ptr)->next;
-	if (tokens_ptr == NULL || (*tokens_ptr) == NULL || (*tokens_ptr)->data == NULL)
-		return (NULL);
 	token = (*tokens_ptr)->data;
 	while (token != NULL && token->type != T_END && token->type != T_PIPE)
 	{
