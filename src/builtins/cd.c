@@ -31,6 +31,12 @@ int	builtin_cd(t_command *command, t_shell *shell)
 	if (command->args[1] == NULL)
 		return (0);
 	old_cwd = getcwd(NULL, 0);
+	if (old_cwd == NULL)
+	{
+		rc = errno;
+		ft_dprintf(STDERR_FILENO, "cd: getcwd: %s\n", strerror(rc));
+		return (rc);
+	}
 	rc = cd(command->args[1]);
 	cwd = getcwd(NULL, 0);
 	if (rc == 0)

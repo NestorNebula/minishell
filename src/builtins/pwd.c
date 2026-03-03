@@ -18,17 +18,30 @@
 #include "file.h"
 #include "libft.h"
 
+static int	pwd(const char *cwd, t_command *command, t_shell *shell);
+
 int	builtin_pwd(t_command *command, t_shell *shell)
 {
 	int		rc;
-	int		fd;
 	char	*cwd;
 
-	(void) command;
-	(void) shell;
 	cwd = getcwd(NULL, 0);
 	if (cwd == NULL)
-		return (errno);
+	{
+		rc = errno;
+		ft_dprintf(STDERR_FILENO, "pwd: getcwd: %s\n", strerror(rc));
+		return (rc);
+	}
+	rc = pwd(cwd, command, shell);
+	free(cwd);
+	return (rc);
+}
+
+static int	pwd(const char *cwd, t_command *command, t_shell *shell)
+{
+	int	rc;
+	int	fd;
+
 	fd = STDOUT_FILENO;
 	if (dll_size(shell->cmds) == 1)
 		fd = ((t_file *) dll_last(command->out_files)->data)->fd;
@@ -40,6 +53,5 @@ int	builtin_pwd(t_command *command, t_shell *shell)
 	}
 	else
 		rc = 0;
-	free(cwd);
 	return (rc);
 }
