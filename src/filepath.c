@@ -13,6 +13,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "env.h"
 #include "filepath.h"
 #include "libft.h"
 
@@ -22,15 +23,19 @@ static char	*get_next_path(const char **paths_ptr, char *buf);
 
 static char	*try_path(const char *filename, const char *path);
 
-char	*find_filepath(const char *filename)
+char	*find_filepath(const char *filename, t_shell *shell)
 {
+	t_env_var	*path_env_var;
 	const char	*paths;
 	char		path[PATH_MAX + 2];
 	char		*filepath;
 
 	if (filename == NULL || ft_strchr("./", filename[0]))
 		return (NULL);
-	paths = getenv(PATHS_KEY);
+	path_env_var = find_env_var(shell->env, PATHS_KEY);
+	if (path_env_var == NULL)
+		return (NULL);
+	paths = path_env_var->value;
 	if (paths == NULL)
 		return (NULL);
 	filepath = NULL;
@@ -57,7 +62,7 @@ static char	*get_next_path(const char **paths_ptr, char *buf)
 	ft_strlcpy(buf, *paths_ptr, size + 1);
 	buf[size] = '/';
 	buf[size + 1] = '\0';
-	*paths_ptr += size + 1;
+	*paths_ptr += size + (*(*paths_ptr + size) != '\0');
 	return (buf);
 }
 

@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   env_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmonmire <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 12:11:39 by cmonmire          #+#    #+#             */
-/*   Updated: 2026/02/05 12:19:19 by cmonmire         ###   ########.fr       */
+/*   Created: 2026/02/24 01:00:42 by cmonmire          #+#    #+#             */
+/*   Updated: 2026/02/24 01:02:34 by cmonmire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#include <stdlib.h>
 
-# include "dll.h"
-
-typedef struct s_shell
+void	free_envp(char **envp)
 {
-	t_dll	*env;
-	t_dll	*cmds;
-	int		last_status;
-	int		running;
-}	t_shell;
+	int	i;
 
-#endif
+	i = 0;
+	while (envp[i])
+		free(envp[i++]);
+	free(envp);
+}

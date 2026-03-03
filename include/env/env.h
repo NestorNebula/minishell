@@ -47,11 +47,39 @@ t_env_var	*find_env_var(t_dll *env_vars, const char *key);
  *
  * @param env_vars_ptr A pointer to a dll
  * @param key A string corresponding to the variable's key
- * @param value A string corresponding to the variable value
+ * @param value A string corresponding to the variable's value
  * @return A pointer to the created/updated variable on success,
  * a NULL pointer on error
  */
 t_env_var	*set_env_var(t_dll **env_vars_ptr, const char *key, char *value);
+
+/**
+ * Creates an array of environment variables from
+ * a list of env_var structures.
+ *
+ * @param env A pointer to the first node of a dll structure
+ * @return A pointer to the first element of
+ * an array of environment variables on success, a null pointer otherwise
+ */
+char		**env_to_envp(t_dll *env);
+
+/**
+ * Creates a list of env_var structures from an array of
+ * environment variables.
+ *
+ * @param envp A pointer to the first element of
+ * an array of environment variables
+ * @return A pointer to the first node of a dll structure
+ */
+t_dll		*envp_to_env(char **envp);
+
+/**
+ * Frees an array of environment variables.
+ *
+ * @param envp A pointer to the first element of
+ * an array of environment variables
+ */
+void		free_envp(char **envp);
 
 /**
  * Frees an env_var structure.
